@@ -1,0 +1,2400 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAMEPULSE | O pulso do universo gamer</title>
+  <meta name="description" content="GAMEPULSE é o portal definitivo de jornalismo gamer e tecnologia no Brasil. Notícias, análises de hardware, consoles PlayStation, Xbox, Nintendo, IA e guias completos.">
+  <meta name="keywords" content="games, tecnologia, hardware, pc gamer, playstation, xbox, nintendo, inteligência artificial, guias, reviews">
+  <meta name="author" content="Redação GamePulse Brasil">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gamepulse.com.br/">
+  <meta property="og:title" content="GAMEPULSE | O pulso do universo gamer">
+  <meta property="og:description" content="Portal profissional especializado em notícias sobre videogames, hardware, consoles e inteligência artificial no Brasil.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GAMEPULSE | O pulso do universo gamer">
+  <meta name="twitter:description" content="Notícias, reviews de hardware, consoles e o melhor da tecnologia gamer em português do Brasil.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&auto=format&fit=crop&q=80">
+
+  <!-- Schema.org JSON-LD para SEO Editorial -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "name": "GAMEPULSE",
+    "slogan": "O pulso do universo gamer",
+    "url": "https://gamepulse.com.br",
+    "sameAs": [
+      "https://twitter.com/gamepulsebr",
+      "https://youtube.com/@gamepulsebr",
+      "https://instagram.com/gamepulsebr"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "BR",
+      "addressLocality": "São Paulo"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN 3.4.17 -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            pulse: {
+              bg: '#10121C',
+              card: '#161928',
+              secondary: '#202438',
+              border: '#2A3048',
+              accent: '#7C3AED',
+              accentHover: '#6D28D9',
+              accentLight: '#A78BFA',
+              text: '#F4F5FA',
+              muted: '#A5A9BC',
+              ps: '#006FCD',
+              xbox: '#107C10',
+              nintendo: '#E60012',
+              tech: '#06B6D4'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos Customizados de Identidade Visual GamePulse */
+    body {
+      background-color: #10121C;
+      color: #F4F5FA;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .pulse-glow {
+      box-shadow: 0 0 25px -5px rgba(124, 58, 237, 0.45);
+    }
+    
+    .pulse-border-glow:focus, .pulse-border-glow:hover {
+      border-color: #7C3AED;
+      box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #10121C;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #202438;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7C3AED;
+    }
+
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7C3AED, #06B6D4);
+      z-index: 100;
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    @keyframes pulseGlowAnim {
+      0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 2px #7C3AED); }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px #7C3AED); }
+    }
+    .pulse-anim {
+      animation: pulseGlowAnim 3s infinite ease-in-out;
+    }
+  </style>
+  <!-- Netlify Identity Widget para Decap CMS -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-[#10121C] text-[#F4F5FA] antialiased">
+  
+  <!-- Barra de progresso de leitura em artigo individual -->
+  <div id="reading-progress"></div>
+
+  <!-- Barra de Notificação Superior / Ticker "Em Alta" -->
+  <div class="bg-[#0c0e17] border-b border-[#202438] text-xs text-[#A5A9BC] py-2 px-4 select-none">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 overflow-hidden">
+        <span class="inline-flex items-center gap-1.5 bg-[#7C3AED]/20 text-[#A78BFA] px-2 py-0.5 rounded font-semibold text-[11px] uppercase tracking-wider shrink-0">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#7C3AED] animate-ping"></span>
+          Em Alta
+        </span>
+        <div class="truncate text-xs font-medium text-[#F4F5FA]" id="top-ticker-text">
+          Próxima geração de arquiteturas gráficas amplia eficiência energética em 35% nos testes de bancada
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-4 shrink-0 text-xs">
+        <span id="current-date-display" class="text-[#A5A9BC]">Sábado, 07 de Novembro de 2026</span>
+        <span class="text-[#202438]">|</span>
+        <button id="btn-newsletter-top" class="text-[#A78BFA] hover:text-[#F4F5FA] transition-colors flex items-center gap-1 font-medium">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Boletim Diário
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CABEÇALHO PRINCIPAL -->
+  <header class="sticky top-0 z-40 bg-[#10121C]/95 backdrop-blur-md border-b border-[#202438] transition-all duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logotipo GAMEPULSE com Slogan -->
+        <div class="flex items-center gap-3">
+          <a href="#/inicio" id="logo-link" class="flex items-center gap-3 group">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4C1D95] flex items-center justify-center p-2 shadow-lg shadow-[#7C3AED]/30 group-hover:scale-105 transition-transform">
+              <!-- Ícone do Pulso Gamer / Batimento + Controle -->
+              <svg class="w-7 h-7 text-[#F4F5FA] pulse-anim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h4l2-6 4 12 3-8 2 4h5"/>
+                <circle cx="20" cy="12" r="1.5" fill="#7C3AED"/>
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-display text-2xl font-extrabold tracking-tight text-[#F4F5FA] flex items-center gap-1">
+                GAME<span class="text-[#7C3AED] drop-shadow-[0_0_8px_rgba(124,58,237,0.8)]">PULSE</span>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[#A5A9BC] -mt-1 group-hover:text-[#A78BFA] transition-colors">
+                O pulso do universo gamer
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Menu de Navegação Desktop -->
+        <nav class="hidden lg:flex items-center space-x-1 font-medium text-sm text-[#A5A9BC]" aria-label="Menu principal">
+          <button data-nav="inicio" class="nav-item-btn px-3 py-2 rounded-lg text-[#F4F5FA] bg-[#202438] hover:text-[#F4F5FA] hover:bg-[#202438] transition-colors font-semibold">
+            Início
+          </button>
+          <button data-nav="noticias" class="nav-item-btn px-3 py-2 rounded-lg hover:text-[#F4F5FA] hover:bg-[#202438]/60 transition-colors">
+            Notícias
+          </button>
+          <button data-nav="games" class="nav-item-btn px-3 py-2 rounded-lg hover:text-[#F4F5FA] hover:bg-[#202438]/60 transition-colors">
+            Games
+          </button>
+          <button data-nav="consoles" class="nav-item-btn px-3 py-2 rounded-lg hover:text-[#F4F5FA] hover:bg-[#202438]/60 transition-colors">
+            Consoles
+          </button>
+          <button data-nav="hardware" class="nav-item-btn px-3 py-2 rounded-lg hover:text-[#F4F5FA] hover:bg-[#202438]/60 transition-colors">
+            Hardware
+          </button>
+          <button data-nav="tecnologia" class="nav-item-btn px-3 py-2 rounded-lg hover:text-[#F4F5FA] hover:bg-[#202438]/60 transition-colors">
+            Tecnologia
+          </button>
+          <button data-nav="guias" class="nav-item-btn px-3 py-2 rounded-lg hover:text-[#F4F5FA] hover:bg-[#202438]/60 transition-colors">
+            Guias
+          </button>
+        </nav>
+
+        <!-- Ações do Cabeçalho: Pesquisa, Publicar Artigo, Menu Mobile -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Botão de Busca -->
+          <button id="btn-open-search" class="p-2.5 rounded-xl bg-[#202438] text-[#A5A9BC] hover:text-[#F4F5FA] hover:bg-[#292F4A] hover:border-[#7C3AED] border border-[#2A3048] transition-all flex items-center gap-2" title="Pesquisar notícias (Atalho: Ctrl+K)" aria-label="Buscar no GamePulse">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <span class="hidden md:inline text-xs font-normal text-[#A5A9BC]">Buscar...</span>
+            <kbd class="hidden md:inline text-[10px] bg-[#10121C] text-[#A5A9BC] px-1.5 py-0.5 rounded border border-[#2A3048]">⌘K</kbd>
+          </button>
+
+                    <!-- Botão Painel CMS Decap -->
+                    <!-- Botão Hamburger Mobile -->
+          <button id="btn-mobile-menu" class="lg:hidden p-2.5 rounded-xl bg-[#202438] text-[#F4F5FA] border border-[#2A3048] hover:bg-[#292F4A] transition-colors" aria-label="Abrir menu de navegação">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gaveta de Navegação Mobile -->
+    <div id="mobile-menu-drawer" class="hidden lg:hidden border-t border-[#202438] bg-[#10121C] px-4 pt-3 pb-6 space-y-2">
+      <div class="grid grid-cols-2 gap-2 text-sm font-medium">
+        <button data-nav="inicio" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg bg-[#202438] text-[#F4F5FA] font-semibold">Início</button>
+        <button data-nav="noticias" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg text-[#A5A9BC] hover:bg-[#202438] hover:text-[#F4F5FA]">Notícias</button>
+        <button data-nav="games" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg text-[#A5A9BC] hover:bg-[#202438] hover:text-[#F4F5FA]">Games</button>
+        <button data-nav="consoles" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg text-[#A5A9BC] hover:bg-[#202438] hover:text-[#F4F5FA]">Consoles</button>
+        <button data-nav="hardware" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg text-[#A5A9BC] hover:bg-[#202438] hover:text-[#F4F5FA]">Hardware</button>
+        <button data-nav="tecnologia" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg text-[#A5A9BC] hover:bg-[#202438] hover:text-[#F4F5FA]">Tecnologia</button>
+        <button data-nav="guias" class="mobile-nav-btn text-left px-3 py-2.5 rounded-lg text-[#A5A9BC] hover:bg-[#202438] hover:text-[#F4F5FA] col-span-2">Guias & Tutoriais</button>
+      </div>
+      <div class="pt-2 border-t border-[#202438] flex flex-col gap-2">
+        <div class="flex items-center justify-around pt-2 text-xs text-[#A5A9BC]">
+          <button data-institutional="sobre" class="hover:text-[#F4F5FA]">Sobre Nós</button>
+          <span>•</span>
+          <button data-institutional="contato" class="hover:text-[#F4F5FA]">Contato</button>
+          <span>•</span>
+          <button data-institutional="editorial" class="hover:text-[#F4F5FA]">Política Editorial</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ESPAÇO PUBLICITÁRIO: Leaderboard Superior (728x90) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+    <div class="w-full bg-[#161928] border border-dashed border-[#2A3048] rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2" role="region" aria-label="Espaço publicitário">
+      <div class="flex items-center gap-3">
+        <span class="bg-[#202438] text-[10px] font-bold text-[#A5A9BC] px-2 py-1 rounded uppercase tracking-wider">Publicidade</span>
+        <span class="text-xs text-[#A5A9BC]">Espaço reservado para campanhas publicitárias e anunciantes parceiros (728x90 / Responsivo)</span>
+      </div>
+      <button data-institutional="contato" class="text-xs font-semibold text-[#7C3AED] hover:text-[#A78BFA] transition-colors shrink-0">
+        Anuncie no GamePulse &rarr;
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTAINER DE VISÕES PRINCIPAIS (SPA) -->
+  <main id="app-viewport" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    
+    <!-- ========================================== -->
+    <!-- VIEW 1: HOME PAGE (PÁGINA INICIAL) -->
+    <!-- ========================================== -->
+    <div id="view-home" class="space-y-12">
+      
+      <!-- 1. MANCHETE PRINCIPAL EM DESTAQUE COM IMAGEM GRANDE -->
+      <section aria-label="Manchete principal em destaque" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Big Hero Card (8 Colunas) -->
+        <article id="hero-main-card" class="lg:col-span-8 group relative rounded-2xl overflow-hidden bg-[#161928] border border-[#2A3048] flex flex-col justify-end min-h-[460px] md:min-h-[520px] transition-all duration-300 hover:border-[#7C3AED]/60 cursor-pointer shadow-xl">
+          <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&auto=format&fit=crop&q=80" alt="Cenário cyberpunk futurista de videogame de nova geração com iluminação neon e mundo aberto" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#10121C] via-[#10121C]/75 to-transparent"></div>
+          
+          <div class="relative z-10 p-6 sm:p-8 flex flex-col justify-end">
+            <div class="flex flex-wrap items-center gap-2.5 mb-3">
+              <span class="bg-[#7C3AED] text-[#F4F5FA] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                Destaque Especial
+              </span>
+              <span class="bg-[#202438]/90 backdrop-blur-sm text-[#A78BFA] text-xs font-medium px-2.5 py-1 rounded-full border border-[#2A3048]">
+                Games & Engenharia Gráfica
+              </span>
+              <span class="text-xs text-[#A5A9BC] flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                8 min de leitura
+              </span>
+            </div>
+            
+            <h1 class="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#F4F5FA] tracking-tight leading-tight mb-3 group-hover:text-[#A78BFA] transition-colors">
+              A Nova Fronteira dos RPGs Sci-Fi: Como a Próxima Geração de Engines Gráficas Redefine Mundos Vivos
+            </h1>
+            
+            <p class="text-sm sm:text-base text-[#A5A9BC] line-clamp-2 sm:line-clamp-3 mb-4 leading-relaxed font-normal">
+              Análise aprofundada sobre renderização neural em tempo real, iluminação volumétrica com traçado de raios e a emergência de sistemas comportamentais que transformam metrópoles virtuais em ecossistemas imersivos e dinâmicos.
+            </p>
+            
+            <div class="flex items-center justify-between pt-3 border-t border-[#202438]/80 text-xs">
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-[#7C3AED] flex items-center justify-center font-bold text-white text-[11px]">
+                  GP
+                </div>
+                <div>
+                  <span class="text-[#F4F5FA] font-medium block">Gabriel Rezende</span>
+                  <span class="text-[#A5A9BC] text-[11px]">07 de Nov, 2026</span>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-1 text-[#A78BFA] font-semibold group-hover:translate-x-1 transition-transform">
+                Ler matéria completa
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Coluna Lateral de Destaques Secundários (4 Colunas) -->
+        <div class="lg:col-span-4 flex flex-col gap-4">
+          <div class="bg-[#161928] border border-[#2A3048] rounded-2xl p-4 flex items-center justify-between">
+            <h2 class="font-display text-sm font-bold uppercase tracking-wider text-[#F4F5FA] flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#7C3AED]"></span>
+              Radar GamePulse
+            </h2>
+            <span class="text-[11px] text-[#A5A9BC]">Atualizado agora</span>
+          </div>
+
+          <!-- Card Secundário 1: Hardware -->
+          <article data-article-id="art-2" class="sub-hero-card group bg-[#161928] border border-[#2A3048] rounded-2xl p-3.5 flex gap-3.5 hover:border-[#7C3AED]/60 transition-all cursor-pointer flex-1">
+            <div class="w-28 sm:w-32 h-24 rounded-xl overflow-hidden shrink-0 relative bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80" alt="Interior de gabinete gamer com refrigeração líquida roxa" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              <span class="absolute bottom-1 left-1 bg-[#10121C]/80 backdrop-blur-sm text-[10px] font-bold text-[#A78BFA] px-1.5 py-0.5 rounded">
+                HARDWARE
+              </span>
+            </div>
+            <div class="flex flex-col justify-between py-0.5">
+              <h3 class="text-xs sm:text-sm font-bold text-[#F4F5FA] leading-snug group-hover:text-[#A78BFA] transition-colors line-clamp-2">
+                Water Cooling Custom e Arquitetura Térmica: O Limite da Eficiência em GPUs de 600W
+              </h3>
+              <div class="flex items-center gap-2 text-[11px] text-[#A5A9BC]">
+                <span>Bancada GP</span>
+                <span>•</span>
+                <span>6 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Secundário 2: Consoles -->
+          <article data-article-id="art-3" class="sub-hero-card group bg-[#161928] border border-[#2A3048] rounded-2xl p-3.5 flex gap-3.5 hover:border-[#7C3AED]/60 transition-all cursor-pointer flex-1">
+            <div class="w-28 sm:w-32 h-24 rounded-xl overflow-hidden shrink-0 relative bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80" alt="Controle de console moderno com iluminação roxa" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              <span class="absolute bottom-1 left-1 bg-[#10121C]/80 backdrop-blur-sm text-[10px] font-bold text-[#006FCD] px-1.5 py-0.5 rounded">
+                CONSOLES
+              </span>
+            </div>
+            <div class="flex flex-col justify-between py-0.5">
+              <h3 class="text-xs sm:text-sm font-bold text-[#F4F5FA] leading-snug group-hover:text-[#A78BFA] transition-colors line-clamp-2">
+                A Evolução dos Controles Hápticos e Gatilhos Adaptativos na Próxima Fase da Geração
+              </h3>
+              <div class="flex items-center gap-2 text-[11px] text-[#A5A9BC]">
+                <span>Especial</span>
+                <span>•</span>
+                <span>5 min</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Secundário 3: Tecnologia & IA -->
+          <article data-article-id="art-4" class="sub-hero-card group bg-[#161928] border border-[#2A3048] rounded-2xl p-3.5 flex gap-3.5 hover:border-[#7C3AED]/60 transition-all cursor-pointer flex-1">
+            <div class="w-28 sm:w-32 h-24 rounded-xl overflow-hidden shrink-0 relative bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80" alt="Processador neural quântico futurista com circuitos luminosos" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              <span class="absolute bottom-1 left-1 bg-[#10121C]/80 backdrop-blur-sm text-[10px] font-bold text-[#06B6D4] px-1.5 py-0.5 rounded">
+                TECNOLOGIA
+              </span>
+            </div>
+            <div class="flex flex-col justify-between py-0.5">
+              <h3 class="text-xs sm:text-sm font-bold text-[#F4F5FA] leading-snug group-hover:text-[#A78BFA] transition-colors line-clamp-2">
+                Inteligência Artificial Generativa e NPCs Vivos: O Salto na Dublagem Dinâmica dos Jogos
+              </h3>
+              <div class="flex items-center gap-2 text-[11px] text-[#A5A9BC]">
+                <span>Inovação</span>
+                <span>•</span>
+                <span>7 min</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 2. ÁREA DE ÚLTIMAS NOTÍCIAS COM FILTROS DE CATEGORIA -->
+      <section aria-label="Últimas notícias do portal" class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#202438] pb-4">
+          <div>
+            <h2 class="font-display text-2xl font-bold text-[#F4F5FA] flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-[#7C3AED]"></span>
+              Últimas Notícias
+            </h2>
+            <p class="text-xs text-[#A5A9BC] mt-0.5">Acompanhe a cobertura editorial em tempo real no Brasil e no mundo</p>
+          </div>
+          
+          <!-- Filtros Rápidos por Categoria -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0" id="home-category-filters">
+            <button data-filter="todos" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#7C3AED] text-[#F4F5FA] transition-colors shrink-0">
+              Todas
+            </button>
+            <button data-filter="Games" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#202438] hover:text-[#F4F5FA] transition-colors shrink-0">
+              Games
+            </button>
+            <button data-filter="Consoles" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#202438] hover:text-[#F4F5FA] transition-colors shrink-0">
+              Consoles
+            </button>
+            <button data-filter="Hardware" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#202438] hover:text-[#F4F5FA] transition-colors shrink-0">
+              Hardware
+            </button>
+            <button data-filter="Tecnologia" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#202438] hover:text-[#F4F5FA] transition-colors shrink-0">
+              Tecnologia & IA
+            </button>
+            <button data-filter="Guias" class="cat-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#202438] hover:text-[#F4F5FA] transition-colors shrink-0">
+              Guias
+            </button>
+          </div>
+        </div>
+
+        <!-- Grade de Notícias Dinâmica -->
+        <div id="latest-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Injetado dinamicamente -->
+        </div>
+      </section>
+
+      <!-- 3. NOTÍCIAS DE CONSOLES: PLAYSTATION, XBOX E NINTENDO -->
+      <section aria-label="Especial Consoles: PlayStation, Xbox e Nintendo" class="bg-[#161928] border border-[#2A3048] rounded-2xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#202438] pb-4">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-xl bg-[#202438] text-[#7C3AED]">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+            </div>
+            <div>
+              <h2 class="font-display text-xl sm:text-2xl font-bold text-[#F4F5FA]">Consoles & Ecossistemas</h2>
+              <p class="text-xs text-[#A5A9BC]">PlayStation, Xbox Series X|S, Nintendo e a revolução dos portáteis</p>
+            </div>
+          </div>
+
+          <!-- Seletor de Plataforma -->
+          <div class="flex items-center gap-2">
+            <button data-console-tab="todos" class="console-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#202438] text-[#F4F5FA] border border-[#2A3048] hover:border-[#7C3AED] transition-colors">
+              Todos
+            </button>
+            <button data-console-tab="PlayStation" class="console-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#10121C] hover:text-[#006FCD] hover:border-[#006FCD] border border-[#2A3048] transition-colors flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#006FCD]"></span> PlayStation
+            </button>
+            <button data-console-tab="Xbox" class="console-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#10121C] hover:text-[#107C10] hover:border-[#107C10] border border-[#2A3048] transition-colors flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#107C10]"></span> Xbox
+            </button>
+            <button data-console-tab="Nintendo" class="console-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium text-[#A5A9BC] bg-[#10121C] hover:text-[#E60012] hover:border-[#E60012] border border-[#2A3048] transition-colors flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#E60012]"></span> Nintendo
+            </button>
+          </div>
+        </div>
+
+        <div id="consoles-cards-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Injetado via JS -->
+        </div>
+      </section>
+
+      <!-- 4. NOTÍCIAS SOBRE COMPUTADORES E HARDWARE -->
+      <section aria-label="Computadores e Hardware de Alta Performance" class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[#202438] pb-4">
+          <div>
+            <h2 class="font-display text-2xl font-bold text-[#F4F5FA] flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-[#06B6D4]"></span>
+              Computadores & Hardware
+            </h2>
+            <p class="text-xs text-[#A5A9BC] mt-0.5">GPUs, processadores, arquiteturas térmicas, testes de bancada e periféricos</p>
+          </div>
+          <button data-nav="hardware" class="text-xs font-semibold text-[#A78BFA] hover:text-[#F4F5FA] flex items-center gap-1 transition-colors">
+            Ver central de hardware &rarr;
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          <!-- Banner Destaque de Hardware (7 Colunas) -->
+          <article data-article-id="art-2" class="lg:col-span-7 bg-[#161928] border border-[#2A3048] rounded-2xl overflow-hidden group cursor-pointer hover:border-[#7C3AED]/60 transition-all flex flex-col shadow-lg">
+            <div class="relative h-64 sm:h-72 overflow-hidden bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80" alt="Gabinete com tubos de refrigeração líquida roxos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-3 left-3 bg-[#7C3AED] text-[#F4F5FA] text-[11px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wide">
+                Bancada GamePulse Lab
+              </div>
+            </div>
+            <div class="p-6 flex flex-col justify-between flex-1">
+              <div>
+                <div class="flex items-center gap-2 text-xs text-[#A5A9BC] mb-2">
+                  <span class="text-[#06B6D4] font-semibold">Análise Técnica</span>
+                  <span>•</span>
+                  <span>Por Matheus Silveira</span>
+                  <span>•</span>
+                  <span>Ontem</span>
+                </div>
+                <h3 class="font-display text-xl font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors mb-3 leading-snug">
+                  Water Cooling Custom e Arquitetura Térmica: O Limite da Eficiência em GPUs de 600W
+                </h3>
+                <p class="text-xs sm:text-sm text-[#A5A9BC] leading-relaxed mb-4">
+                  Testamos circuitos de radiadores duplos de 360mm sob estresse contínuo em 4K. Descubra como a dissipação térmica avançada impacta as frequências de boost contínuo e a vida útil dos componentes de ponta.
+                </p>
+              </div>
+
+              <!-- Tabela Comparativa de Benchmarks Demonstrativos -->
+              <div class="bg-[#10121C] border border-[#202438] rounded-xl p-3 text-xs">
+                <div class="font-semibold text-[#F4F5FA] mb-2 flex items-center justify-between">
+                  <span>Média de Temperatura e Boost (Demonstrativo Lab GP)</span>
+                  <span class="text-[10px] text-[#A78BFA]">4K Ultra + RT</span>
+                </div>
+                <div class="space-y-1.5 text-[11px]">
+                  <div class="flex justify-between items-center text-[#A5A9BC]">
+                    <span>Custom Loop Líquido:</span>
+                    <span class="font-bold text-[#10B981]">52°C | 2.850 MHz estável</span>
+                  </div>
+                  <div class="flex justify-between items-center text-[#A5A9BC]">
+                    <span>Air Cooler Triplo Convencional:</span>
+                    <span class="font-bold text-[#F59E0B]">74°C | 2.620 MHz variável</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Lista de Notícias de Hardware (5 Colunas) -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            
+            <article data-article-id="art-5" class="group bg-[#161928] border border-[#2A3048] rounded-2xl p-4 hover:border-[#7C3AED]/60 transition-all cursor-pointer flex-1">
+              <span class="text-[10px] font-bold text-[#7C3AED] uppercase tracking-wider block mb-1">Periféricos & Precisão</span>
+              <h3 class="text-sm font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors leading-snug mb-2">
+                Switches Magnéticos Hall Effect: O Ponto de Atuação Configurável no Cenário Competitivo
+              </h3>
+              <p class="text-xs text-[#A5A9BC] line-clamp-2 mb-3">
+                Como os sensores magnéticos sem contato físico estão eliminando o delay mecânico em teclados para pro-players.
+              </p>
+              <div class="text-[11px] text-[#A5A9BC] flex items-center justify-between">
+                <span>5 min de leitura</span>
+                <span class="text-[#7C3AED] font-semibold group-hover:translate-x-1 transition-transform">Ler &rarr;</span>
+              </div>
+            </article>
+
+            <article data-article-id="art-5" class="group bg-[#161928] border border-[#2A3048] rounded-2xl p-4 hover:border-[#7C3AED]/60 transition-all cursor-pointer flex-1">
+              <span class="text-[10px] font-bold text-[#06B6D4] uppercase tracking-wider block mb-1">PC Portátil & SoC</span>
+              <h3 class="text-sm font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors leading-snug mb-2">
+                A Revolução dos PCs Portáteis: Desempenho Gráfico em Silício de Baixo Consumo (15W a 30W)
+              </h3>
+              <p class="text-xs text-[#A5A9BC] line-clamp-2 mb-3">
+                Comparações de eficiência entre memórias LPDDR5X unificadas e arquiteturas gráficas integradas de última geração.
+              </p>
+              <div class="text-[11px] text-[#A5A9BC] flex items-center justify-between">
+                <span>5 min de leitura</span>
+                <span class="text-[#7C3AED] font-semibold group-hover:translate-x-1 transition-transform">Ler &rarr;</span>
+              </div>
+            </article>
+
+            <!-- Box Informativo: Análise de Preços de Peças no Brasil -->
+            <div class="bg-gradient-to-br from-[#202438] to-[#161928] border border-[#2A3048] rounded-2xl p-4 text-xs">
+              <div class="flex items-center gap-2 text-[#F4F5FA] font-bold mb-1">
+                <svg class="w-4 h-4 text-[#7C3AED]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                Radar de Preços Gamer BR
+              </div>
+              <p class="text-[#A5A9BC] text-[11px] mb-2 leading-relaxed">
+                Módulos DDR5 e SSDs NVMe PCIe 4.0 mostram estabilidade no varejo brasileiro no último trimestre.
+              </p>
+              <button data-nav="hardware" class="text-[11px] font-semibold text-[#A78BFA] hover:text-[#F4F5FA] transition-colors">
+                Consultar matérias de hardware &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. NOVIDADES DE TECNOLOGIA E INTELIGÊNCIA ARTIFICIAL -->
+      <section aria-label="Tecnologia e Inteligência Artificial" class="bg-gradient-to-r from-[#161928] to-[#1a1d2e] border border-[#2A3048] rounded-2xl p-6 sm:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 bg-[#06B6D4]/10 text-[#06B6D4] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-[#06B6D4]/20">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              Inovação & Inteligência Artificial
+            </div>
+            
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-[#F4F5FA] tracking-tight leading-tight">
+              Inteligência Artificial Generativa e o Futuro da Criação de Jogos e Narrativas Interativas
+            </h2>
+            
+            <p class="text-sm text-[#A5A9BC] leading-relaxed">
+              Como modelos neurais treinados para física procedimental, animação esquelética em tempo real e dublagem contextual estão diminuindo prazos de desenvolvimento e permitindo que estúdios independentes alcancem escopo de superproduções.
+            </p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+              <div class="bg-[#10121C]/80 border border-[#202438] p-3 rounded-xl">
+                <span class="block text-xs font-bold text-[#F4F5FA]">NPCs Cognitivos</span>
+                <span class="text-[11px] text-[#A5A9BC]">Diálogos sem scripts fixos</span>
+              </div>
+              <div class="bg-[#10121C]/80 border border-[#202438] p-3 rounded-xl">
+                <span class="block text-xs font-bold text-[#F4F5FA]">Neural Upscaling</span>
+                <span class="text-[11px] text-[#A5A9BC]">Reconstrução por raios</span>
+              </div>
+              <div class="bg-[#10121C]/80 border border-[#202438] p-3 rounded-xl col-span-2 sm:col-span-1">
+                <span class="block text-xs font-bold text-[#F4F5FA]">Mundo Procedural</span>
+                <span class="text-[11px] text-[#A5A9BC]">Erosão e relevo orgânicos</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button data-article-id="art-4" class="inline-flex items-center gap-2 bg-[#7C3AED] hover:bg-[#6D28D9] text-[#F4F5FA] text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-[#7C3AED]/20">
+                Ler Análise Completa de IA nos Games
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 relative">
+            <div class="rounded-2xl overflow-hidden border border-[#2A3048] relative group shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&auto=format&fit=crop&q=80" alt="Processador de IA com traços luminosos roxos e azuis" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#10121C]/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 p-3 bg-[#10121C]/90 backdrop-blur-md rounded-xl border border-[#202438] text-xs">
+                <span class="text-[#06B6D4] font-semibold block text-[11px]">Tecnologia Emergente</span>
+                <span class="text-[#F4F5FA] font-medium">Chips de inferência neural dedicados em placas de vídeo e consoles</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. GUIAS E TUTORIAIS PRÁTICOS -->
+      <section aria-label="Guias e tutoriais para gamers" class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[#202438] pb-4">
+          <div>
+            <h2 class="font-display text-2xl font-bold text-[#F4F5FA] flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-[#F59E0B]"></span>
+              Guias & Tutoriais
+            </h2>
+            <p class="text-xs text-[#A5A9BC] mt-0.5">Otimizações passo a passo, calibração de periféricos e guias de montagem</p>
+          </div>
+          <button data-nav="guias" class="text-xs font-semibold text-[#A78BFA] hover:text-[#F4F5FA] flex items-center gap-1 transition-colors">
+            Explorar todos os guias &rarr;
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Guia 1 -->
+          <article data-article-id="art-3" class="guide-card group bg-[#161928] border border-[#2A3048] rounded-2xl overflow-hidden hover:border-[#F59E0B]/60 transition-all cursor-pointer flex flex-col">
+            <div class="relative h-44 overflow-hidden bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&auto=format&fit=crop&q=80" alt="Arena de esports competitiva com telões" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-3 left-3 bg-[#F59E0B] text-[#10121C] text-[10px] font-extrabold px-2 py-0.5 rounded uppercase">
+                Passo a Passo
+              </div>
+              <div class="absolute bottom-3 right-3 bg-[#10121C]/80 backdrop-blur-sm text-[#F4F5FA] text-[10px] font-semibold px-2 py-1 rounded">
+                Nível: Intermediário
+              </div>
+            </div>
+            <div class="p-5 flex flex-col justify-between flex-1">
+              <div>
+                <span class="text-[11px] font-semibold text-[#F59E0B] block mb-1">Otimização de Sistema</span>
+                <h3 class="font-display text-base font-bold text-[#F4F5FA] group-hover:text-[#F59E0B] transition-colors mb-2 leading-snug">
+                  Guia Definitivo: Como Otimizar a Latência e os Quadros por Segundo (FPS) no seu Monitor
+                </h3>
+                <p class="text-xs text-[#A5A9BC] line-clamp-3 leading-relaxed mb-4">
+                  Passo a passo com ajustes no driver, calibração de G-Sync/FreeSync, ativação do Ultra Low Latency e desativação de processos em segundo plano.
+                </p>
+              </div>
+              <div class="flex items-center justify-between text-xs text-[#A5A9BC] pt-3 border-t border-[#202438]">
+                <span>9 min de leitura</span>
+                <span class="text-[#F59E0B] font-semibold group-hover:translate-x-1 transition-transform">Ler Guia Completo &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guia 2 -->
+          <article data-article-id="art-2" class="guide-card group bg-[#161928] border border-[#2A3048] rounded-2xl overflow-hidden hover:border-[#F59E0B]/60 transition-all cursor-pointer flex flex-col">
+            <div class="relative h-44 overflow-hidden bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80" alt="PC gamer montado com cabos organizados" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-3 left-3 bg-[#F59E0B] text-[#10121C] text-[10px] font-extrabold px-2 py-0.5 rounded uppercase">
+                Montagem & Hardware
+              </div>
+              <div class="absolute bottom-3 right-3 bg-[#10121C]/80 backdrop-blur-sm text-[#F4F5FA] text-[10px] font-semibold px-2 py-1 rounded">
+                Nível: Todos
+              </div>
+            </div>
+            <div class="p-5 flex flex-col justify-between flex-1">
+              <div>
+                <span class="text-[11px] font-semibold text-[#F59E0B] block mb-1">Guia de Compras</span>
+                <h3 class="font-display text-base font-bold text-[#F4F5FA] group-hover:text-[#F59E0B] transition-colors mb-2 leading-snug">
+                  Como Equilibrar CPU e GPU em 2026 para Evitar Gargalos (Bottlenecks)
+                </h3>
+                <p class="text-xs text-[#A5A9BC] line-clamp-3 leading-relaxed mb-4">
+                  Entenda quais resoluções exigem mais processador e onde investir mais orçamento para rodar lançamentos em 1440p e 4K.
+                </p>
+              </div>
+              <div class="flex items-center justify-between text-xs text-[#A5A9BC] pt-3 border-t border-[#202438]">
+                <span>7 min de leitura</span>
+                <span class="text-[#F59E0B] font-semibold group-hover:translate-x-1 transition-transform">Ler Guia Completo &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Guia 3 -->
+          <article data-article-id="art-5" class="guide-card group bg-[#161928] border border-[#2A3048] rounded-2xl overflow-hidden hover:border-[#F59E0B]/60 transition-all cursor-pointer flex flex-col">
+            <div class="relative h-44 overflow-hidden bg-[#202438]">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80" alt="Controle com regulagem precisa de resposta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-3 left-3 bg-[#F59E0B] text-[#10121C] text-[10px] font-extrabold px-2 py-0.5 rounded uppercase">
+                Competitivo
+              </div>
+              <div class="absolute bottom-3 right-3 bg-[#10121C]/80 backdrop-blur-sm text-[#F4F5FA] text-[10px] font-semibold px-2 py-1 rounded">
+                Nível: Avançado
+              </div>
+            </div>
+            <div class="p-5 flex flex-col justify-between flex-1">
+              <div>
+                <span class="text-[11px] font-semibold text-[#F59E0B] block mb-1">Periféricos & Áudio</span>
+                <h3 class="font-display text-base font-bold text-[#F4F5FA] group-hover:text-[#F59E0B] transition-colors mb-2 leading-snug">
+                  Calibração de Áudio Espacial e Equalização para Jogos Táticos de Tiro
+                </h3>
+                <p class="text-xs text-[#A5A9BC] line-clamp-3 leading-relaxed mb-4">
+                  Como isolar passos e recargas de armas diminuindo frequências de graves excessivas que mascaram pistas sonoras vitais.
+                </p>
+              </div>
+              <div class="flex items-center justify-between text-xs text-[#A5A9BC] pt-3 border-t border-[#202438]">
+                <span>6 min de leitura</span>
+                <span class="text-[#F59E0B] font-semibold group-hover:translate-x-1 transition-transform">Ler Guia Completo &rarr;</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 7. ÁREA DE ARTIGOS MAIS POPULARES + WIDGET DE NEWSLETTER & ANÚNCIO SIDEBAR -->
+      <section aria-label="Artigos populares e mais lidos" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Lista de Artigos Populares (8 Colunas) -->
+        <div class="lg:col-span-8 bg-[#161928] border border-[#2A3048] rounded-2xl p-6 sm:p-8 space-y-6">
+          <div class="flex items-center justify-between border-b border-[#202438] pb-4">
+            <h2 class="font-display text-xl sm:text-2xl font-bold text-[#F4F5FA] flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-[#7C3AED]"></span>
+              Mais Lidos da Semana
+            </h2>
+            <span class="text-xs text-[#A5A9BC]">Atualizado a cada 24h</span>
+          </div>
+
+          <div id="popular-articles-list" class="space-y-4">
+            <!-- Injetado dinamicamente via JS com numeração 01, 02, 03... -->
+          </div>
+        </div>
+
+        <!-- Coluna Lateral: Newsletter + Espaço Anúncio (4 Colunas) -->
+        <div class="lg:col-span-4 space-y-6">
+          
+          <!-- Widget Newsletter GamePulse -->
+          <div class="bg-gradient-to-br from-[#202438] to-[#161928] border border-[#2A3048] rounded-2xl p-6 shadow-xl space-y-4">
+            <div class="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-[#A78BFA]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display text-lg font-bold text-[#F4F5FA]">Boletim GamePulse Diário</h3>
+              <p class="text-xs text-[#A5A9BC] mt-1 leading-relaxed">
+                Receba o resumo matinal com as notícias mais importantes sobre games, hardware e tecnologia diretamente no seu e-mail.
+              </p>
+            </div>
+            
+            <form id="newsletter-form" class="space-y-2">
+              <input type="email" id="newsletter-email" required placeholder="Seu melhor e-mail..." class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3.5 py-2.5 text-xs text-[#F4F5FA] placeholder-[#A5A9BC] focus:outline-none focus:border-[#7C3AED] transition-colors">
+              <button type="submit" class="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-[#F4F5FA] font-bold text-xs py-2.5 rounded-xl transition-colors shadow-md shadow-[#7C3AED]/20">
+                Inscrever-se Gratuitamente
+              </button>
+            </form>
+            <p class="text-[10px] text-[#A5A9BC] text-center">Respeitamos sua privacidade. Cancele a qualquer momento.</p>
+          </div>
+
+          <!-- ESPAÇO PUBLICITÁRIO: Retângulo Médio (300x250) -->
+          <div class="bg-[#161928] border border-dashed border-[#2A3048] rounded-2xl p-6 text-center space-y-3" role="region" aria-label="Espaço de publicidade lateral">
+            <span class="inline-block bg-[#202438] text-[10px] font-bold text-[#A5A9BC] px-2 py-0.5 rounded uppercase">
+              Publicidade
+            </span>
+            <div class="h-44 rounded-xl bg-[#10121C] border border-[#202438] flex flex-col items-center justify-center p-4">
+              <span class="text-xs font-bold text-[#F4F5FA] mb-1">Formato 300x250</span>
+              <span class="text-[11px] text-[#A5A9BC] mb-3">Destaque sua marca para o público gamer e entusiastas de tecnologia do Brasil</span>
+              <button data-institutional="contato" class="text-xs font-semibold text-[#7C3AED] hover:text-[#A78BFA] transition-colors">
+                Mídia Kit & Tarifário &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: FEED COMPLETO DE NOTÍCIAS / CATEGORIAS -->
+    <!-- ========================================== -->
+    <div id="view-category-feed" class="hidden space-y-8">
+      
+      <!-- Cabeçalho da Categoria Selecionada -->
+      <div class="bg-[#161928] border border-[#2A3048] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-xs text-[#A5A9BC] mb-2">
+            <button data-nav="inicio" class="hover:text-[#F4F5FA]">Início</button>
+            <span>/</span>
+            <span id="category-feed-breadcrumb" class="text-[#A78BFA] font-medium">Todas as Notícias</span>
+          </div>
+          <h1 id="category-feed-title" class="font-display text-2xl sm:text-3xl font-extrabold text-[#F4F5FA]">
+            Todas as Notícias
+          </h1>
+          <p id="category-feed-desc" class="text-xs sm:text-sm text-[#A5A9BC] mt-1">
+            Cobertura completa de lançamentos, hardware, análises e tendências do ecossistema de games.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <span id="category-feed-count" class="bg-[#202438] text-xs font-bold text-[#A78BFA] px-3 py-1.5 rounded-lg border border-[#2A3048]">
+            10 matérias encontradas
+          </span>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros e Busca Rápida -->
+      <div class="flex flex-wrap items-center justify-between gap-4 bg-[#161928] border border-[#2A3048] p-4 rounded-xl">
+        <div class="flex flex-wrap items-center gap-2" id="feed-category-pills">
+          <!-- Injetado via JS -->
+        </div>
+        <div class="text-xs text-[#A5A9BC]">
+          Ordenado por: <span class="font-semibold text-[#F4F5FA]">Mais Recentes</span>
+        </div>
+      </div>
+
+      <!-- Grade de Artigos do Feed -->
+      <div id="category-articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Injetado dinamicamente via JS -->
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: LEITOR INDIVIDUAL DE ARTIGO (PÁGINA INDIVIDUAL) -->
+    <!-- ========================================== -->
+    <div id="view-article" class="hidden space-y-8">
+      
+      <!-- Barra Superior do Artigo: Navegação e Voltar -->
+      <div class="flex items-center justify-between border-b border-[#202438] pb-4">
+        <button id="btn-back-to-feed" class="inline-flex items-center gap-2 text-xs font-bold text-[#A78BFA] hover:text-[#F4F5FA] transition-colors py-1.5 px-3 rounded-lg bg-[#202438] border border-[#2A3048]">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          Voltar para Notícias
+        </button>
+
+        <!-- Breadcrumbs do Artigo -->
+        <nav class="hidden sm:flex items-center gap-2 text-xs text-[#A5A9BC]" aria-label="Breadcrumb">
+          <button data-nav="inicio" class="hover:text-[#F4F5FA]">Início</button>
+          <span>/</span>
+          <span id="article-breadcrumb-cat" class="hover:text-[#F4F5FA] cursor-pointer">Games</span>
+          <span>/</span>
+          <span class="text-[#F4F5FA] font-medium truncate max-w-xs" id="article-breadcrumb-title">Título</span>
+        </nav>
+      </div>
+
+      <!-- Conteúdo Editorial do Artigo -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Coluna Principal do Artigo (8 Colunas) -->
+        <article class="lg:col-span-8 bg-[#161928] border border-[#2A3048] rounded-2xl p-6 sm:p-10 space-y-8 shadow-xl">
+          
+          <!-- Metadados e Cabeçalho do Artigo -->
+          <header class="space-y-4">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span id="article-category-badge" class="bg-[#7C3AED] text-[#F4F5FA] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                GAMES
+              </span>
+              <span id="article-read-time" class="text-xs text-[#A5A9BC] flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                8 min de leitura
+              </span>
+              <span class="text-xs text-[#A5A9BC]">•</span>
+              <span class="text-xs text-[#10B981] font-semibold flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Verificado pela Redação
+              </span>
+            </div>
+
+            <h1 id="article-title" class="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#F4F5FA] tracking-tight leading-tight">
+              Título do Artigo Completo
+            </h1>
+
+            <p id="article-subtitle" class="text-sm sm:text-base text-[#A5A9BC] leading-relaxed font-normal">
+              Subtítulo editorial detalhando o contexto e as principais conclusões apuradas pela equipe.
+            </p>
+
+            <!-- Card do Autor e Data -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#202438]">
+              <div class="flex items-center gap-3">
+                <div id="article-author-avatar" class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#7C3AED] to-[#06B6D4] flex items-center justify-center font-bold text-white text-sm">
+                  GP
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span id="article-author-name" class="text-sm font-bold text-[#F4F5FA]">Redação GamePulse</span>
+                    <span class="bg-[#202438] text-[10px] text-[#A78BFA] px-1.5 py-0.5 rounded font-medium">Staff</span>
+                  </div>
+                  <span id="article-date" class="text-xs text-[#A5A9BC]">Publicado em 07 de Novembro de 2026</span>
+                </div>
+              </div>
+
+              <!-- Botões de Compartilhamento Social -->
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-[#A5A9BC] mr-1 hidden sm:inline">Compartilhar:</span>
+                <button id="btn-share-whatsapp" class="p-2 rounded-lg bg-[#202438] text-[#10B981] hover:bg-[#10B981]/20 transition-colors" title="Compartilhar no WhatsApp" aria-label="Compartilhar no WhatsApp">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.062-2.115-.533-1.815-.762-2.983-2.617-3.073-2.737-.089-.12-1.39-1.854-1.39-3.536 0-1.682.879-2.511 1.192-2.855.313-.344.683-.43.911-.43.228 0 .456.002.656.012.211.011.493-.08.77.588.286.689.974 2.378 1.059 2.551.085.172.143.372.029.599-.114.227-.172.37-.343.569-.171.199-.36.444-.514.597-.171.171-.35.358-.15.702.2.344.89 1.467 1.91 2.375 1.311 1.168 2.416 1.53 2.76 1.7.344.172.544.143.744-.086.2-.229.858-.999 1.087-1.343.229-.344.457-.286.771-.172.314.114 1.996.942 2.339 1.114.343.172.572.257.657.401.085.143.085.83-.059 1.235z"/></svg>
+                </button>
+                <button id="btn-share-twitter" class="p-2 rounded-lg bg-[#202438] text-[#06B6D4] hover:bg-[#06B6D4]/20 transition-colors" title="Compartilhar no X (Twitter)" aria-label="Compartilhar no X">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </button>
+                <button id="btn-share-copy" class="p-2 rounded-lg bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED]/20 transition-colors flex items-center gap-1 text-xs font-medium" title="Copiar Link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                  <span class="hidden sm:inline">Copiar Link</span>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <!-- Imagem Grande de Destaque do Artigo -->
+          <div class="rounded-2xl overflow-hidden border border-[#2A3048] relative">
+            <img id="article-cover-img" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80" alt="Imagem de capa do artigo" class="w-full h-auto max-h-[500px] object-cover">
+            <div id="article-img-caption" class="p-3 bg-[#10121C] text-[11px] text-[#A5A9BC] border-t border-[#202438] flex items-center justify-between">
+              <span>Imagem ilustrativa do arquivo GamePulse</span>
+              <span class="text-[#7C3AED]">© GamePulse Editorial</span>
+            </div>
+          </div>
+
+          <!-- Corpo Principal do Texto Editorial -->
+          <div id="article-body-content" class="space-y-6 text-[#F4F5FA] leading-relaxed text-sm sm:text-base">
+            <!-- Injetado dinamicamente via JS -->
+          </div>
+
+          <!-- Nuvem de Tags do Artigo -->
+          <div class="pt-6 border-t border-[#202438]">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#A5A9BC] mb-3">Tags Relacionadas</h4>
+            <div id="article-tags-container" class="flex flex-wrap gap-2">
+              <!-- Injetado via JS -->
+            </div>
+          </div>
+
+          <!-- ESPAÇO PUBLICITÁRIO: Banner In-Article -->
+          <div class="bg-[#10121C] border border-dashed border-[#2A3048] rounded-xl p-4 text-center my-6">
+            <span class="text-[10px] font-bold text-[#A5A9BC] bg-[#202438] px-2 py-0.5 rounded uppercase">Publicidade Patrocinada</span>
+            <p class="text-xs text-[#A5A9BC] mt-2">Equipamentos, hardware e lançamentos oficiais com garantia nacional. Anuncie no GamePulse.</p>
+          </div>
+
+          <!-- Seção de Comentários dos Leitores -->
+          <section class="pt-8 border-t border-[#202438] space-y-6" aria-label="Comentários da comunidade">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-xl font-bold text-[#F4F5FA] flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#7C3AED]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                Comentários da Comunidade (<span id="comments-count">3</span>)
+              </h3>
+              <span class="text-xs text-[#A5A9BC]">Diretrizes de respeito ativas</span>
+            </div>
+
+            <!-- Formulário para Enviar Comentário -->
+            <form id="comment-form" class="bg-[#10121C] border border-[#2A3048] rounded-xl p-4 space-y-3">
+              <h4 class="text-xs font-bold text-[#F4F5FA] uppercase tracking-wider">Deixe sua opinião sobre a matéria</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input type="text" id="comment-author" required placeholder="Seu nome ou gamertag..." class="bg-[#161928] border border-[#2A3048] rounded-lg px-3 py-2 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+                <input type="email" id="comment-email" placeholder="Seu e-mail (não será exibido)..." class="bg-[#161928] border border-[#2A3048] rounded-lg px-3 py-2 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+              </div>
+              <textarea id="comment-text" required rows="3" placeholder="O que você achou dessa análise? Compartilhe seus pensamentos com outros gamers..." class="w-full bg-[#161928] border border-[#2A3048] rounded-lg p-3 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]"></textarea>
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] text-[#A5A9BC]">Seu comentário será publicado instantaneamente.</span>
+                <button type="submit" class="bg-[#7C3AED] hover:bg-[#6D28D9] text-[#F4F5FA] font-bold text-xs px-4 py-2 rounded-lg transition-colors">
+                  Publicar Comentário
+                </button>
+              </div>
+            </form>
+
+            <!-- Lista de Comentários Existentes -->
+            <div id="comments-list" class="space-y-3">
+              <!-- Injetado dinamicamente via JS -->
+            </div>
+          </section>
+
+        </article>
+
+        <!-- Barra Lateral do Artigo (4 Colunas) -->
+        <aside class="lg:col-span-4 space-y-6">
+          
+          <!-- Box: Sobre o Autor -->
+          <div class="bg-[#161928] border border-[#2A3048] rounded-2xl p-6 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#7C3AED]">Perfil Editorial</h4>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-[#7C3AED] flex items-center justify-center font-extrabold text-white text-base">
+                GP
+              </div>
+              <div>
+                <span class="font-bold text-sm text-[#F4F5FA] block">Equipe GamePulse Brasil</span>
+                <span class="text-xs text-[#A5A9BC]">Jornalismo Gamer Especializado</span>
+              </div>
+            </div>
+            <p class="text-xs text-[#A5A9BC] leading-relaxed">
+              Produzindo análises aprofundadas, testes de laboratório de hardware e coberturas ao vivo para a comunidade de jogadores brasileira desde 2024.
+            </p>
+          </div>
+
+          <!-- Artigos Recomendados -->
+          <div class="bg-[#161928] border border-[#2A3048] rounded-2xl p-6 space-y-4">
+            <h4 class="font-display text-base font-bold text-[#F4F5FA] flex items-center gap-2 border-b border-[#202438] pb-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#7C3AED]"></span>
+              Leia Também
+            </h4>
+            <div id="article-related-list" class="space-y-3">
+              <!-- Injetado via JS -->
+            </div>
+          </div>
+
+          <!-- ESPAÇO PUBLICITÁRIO: Sticky Sidebar Banner (300x600 / 300x250) -->
+          <div class="bg-[#161928] border border-dashed border-[#2A3048] rounded-2xl p-5 text-center space-y-3 sticky top-24">
+            <span class="inline-block bg-[#202438] text-[10px] font-bold text-[#A5A9BC] px-2 py-0.5 rounded uppercase">
+              Anúncio Patrocinado
+            </span>
+            <div class="h-60 rounded-xl bg-[#10121C] border border-[#202438] flex flex-col items-center justify-center p-4">
+              <span class="text-sm font-bold text-[#F4F5FA] mb-1">Espaço Comercial</span>
+              <span class="text-xs text-[#A5A9BC] mb-4">Campanhas segmentadas de periféricos, jogos e hardware de alto desempenho.</span>
+              <button data-institutional="contato" class="text-xs font-semibold text-[#7C3AED] hover:text-[#A78BFA] transition-colors">
+                Fale com nossa equipe comercial &rarr;
+              </button>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: PÁGINAS INSTITUCIONAIS -->
+    <!-- ========================================== -->
+    <div id="view-institutional" class="hidden max-w-4xl mx-auto space-y-8 py-4">
+      
+      <div class="flex items-center justify-between border-b border-[#202438] pb-4">
+        <button id="btn-back-from-institutional" class="inline-flex items-center gap-2 text-xs font-bold text-[#A78BFA] hover:text-[#F4F5FA] transition-colors py-1.5 px-3 rounded-lg bg-[#202438] border border-[#2A3048]">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          Voltar ao Portal
+        </button>
+
+        <span class="text-xs text-[#A5A9BC]">Seção Institucional GamePulse</span>
+      </div>
+
+      <div class="bg-[#161928] border border-[#2A3048] rounded-2xl p-6 sm:p-10 shadow-xl" id="institutional-content-wrapper">
+        <!-- Injetado dinamicamente: Sobre, Contato, Privacidade, Editorial -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: PESQUISA INTERNA INSTANTÂNEA -->
+  <!-- ========================================== -->
+  <div id="modal-search" class="fixed inset-0 z-50 bg-[#000000]/80 backdrop-blur-sm hidden flex items-start justify-center p-4 pt-16 sm:pt-24">
+    <div class="bg-[#161928] border border-[#2A3048] rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[80vh]">
+      
+      <!-- Campo de Entrada de Busca -->
+      <div class="p-4 border-b border-[#202438] flex items-center gap-3">
+        <svg class="w-5 h-5 text-[#7C3AED] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="search-input" placeholder="Buscar por jogos, hardware, consoles, tutoriais ou tags..." class="w-full bg-transparent text-sm sm:text-base text-[#F4F5FA] placeholder-[#A5A9BC] focus:outline-none">
+        <button id="btn-close-search" class="p-1.5 rounded-lg text-[#A5A9BC] hover:text-[#F4F5FA] hover:bg-[#202438] transition-colors" aria-label="Fechar busca">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Sugestões de Tags Rápidas -->
+      <div class="px-4 py-2.5 bg-[#10121C] border-b border-[#202438] flex items-center gap-2 overflow-x-auto text-xs">
+        <span class="text-[#A5A9BC] shrink-0 font-medium">Sugestões:</span>
+        <button class="search-tag-chip px-2.5 py-1 rounded bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors shrink-0">#RayTracing</button>
+        <button class="search-tag-chip px-2.5 py-1 rounded bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors shrink-0">#Hardware</button>
+        <button class="search-tag-chip px-2.5 py-1 rounded bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors shrink-0">#PlayStation</button>
+        <button class="search-tag-chip px-2.5 py-1 rounded bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors shrink-0">#Xbox</button>
+        <button class="search-tag-chip px-2.5 py-1 rounded bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors shrink-0">#Nintendo</button>
+        <button class="search-tag-chip px-2.5 py-1 rounded bg-[#202438] text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors shrink-0">#IA</button>
+      </div>
+
+      <!-- Resultados da Pesquisa -->
+      <div id="search-results-container" class="p-4 overflow-y-auto space-y-3 flex-1">
+        <div class="text-center py-8 text-xs text-[#A5A9BC]">
+          Digite um termo ou clique em uma das tags para pesquisar matérias no portal.
+        </div>
+      </div>
+
+      <div class="p-3 bg-[#10121C] border-t border-[#202438] text-[11px] text-[#A5A9BC] flex items-center justify-between">
+        <span>Dica: Pressione <kbd class="bg-[#202438] text-[#F4F5FA] px-1 py-0.5 rounded text-[10px]">ESC</kbd> para fechar</span>
+        <span id="search-count-label"></span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: PUBLICAR NOVO ARTIGO (CMS EDITORIAL) -->
+  <!-- ========================================== -->
+  <div id="modal-new-article" class="fixed inset-0 z-50 bg-[#000000]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#161928] border border-[#2A3048] rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+      
+      <div class="p-5 border-b border-[#202438] flex items-center justify-between bg-[#10121C]">
+        <div class="flex items-center gap-2">
+          <div class="p-2 rounded-lg bg-[#7C3AED]/20 text-[#A78BFA]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-bold text-[#F4F5FA]">Publicar Artigo Editorial</h3>
+            <p class="text-xs text-[#A5A9BC]">Sistema CMS demonstrativo GamePulse</p>
+          </div>
+        </div>
+        <button id="btn-close-new-article" class="p-1.5 rounded-lg text-[#A5A9BC] hover:text-[#F4F5FA] hover:bg-[#202438] transition-colors" aria-label="Fechar modal de publicação">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="new-article-form" class="p-6 space-y-4 overflow-y-auto flex-1">
+        
+        <div>
+          <label for="input-art-title" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Título da Manchete *</label>
+          <input type="text" id="input-art-title" required placeholder="Ex: Análise Completa: Novo Chipset Eleva Taxas de Quadros em 4K" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3.5 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+        </div>
+
+        <div>
+          <label for="input-art-subtitle" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Subtítulo / Resumo *</label>
+          <textarea id="input-art-subtitle" required rows="2" placeholder="Resumo com as principais conclusões e contexto editorial da matéria..." class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl p-3 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label for="select-art-category" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Categoria *</label>
+            <select id="select-art-category" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+              <option value="Games">Games</option>
+              <option value="Consoles">Consoles</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Tecnologia">Tecnologia & IA</option>
+              <option value="Guias">Guias & Tutoriais</option>
+            </select>
+          </div>
+          <div>
+            <label for="input-art-author" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Autor / Repórter *</label>
+            <input type="text" id="input-art-author" required value="Redação GamePulse" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+          </div>
+          <div>
+            <label for="input-art-readtime" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Tempo de Leitura</label>
+            <input type="text" id="input-art-readtime" value="5 min" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+          </div>
+        </div>
+
+        <div>
+          <label for="select-art-image" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Imagem de Capa (Banco do Portal) *</label>
+          <select id="select-art-image" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+            <option value="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80">Cidade Cyberpunk Futurista (Games / Sci-Fi)</option>
+            <option value="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&auto=format&fit=crop&q=80">Gabinete Liquid Cooling Roxo (Hardware / PC)</option>
+            <option value="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&auto=format&fit=crop&q=80">Controle Gamer com LED Roxo (Consoles)</option>
+            <option value="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80">Processador Neural Quântico (Tecnologia & IA)</option>
+            <option value="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80">Console Portátil nas Mãos (Portáteis / Nintendo)</option>
+            <option value="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80">Palco de Torneio de eSports (Competitivo / Guias)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="input-art-tags" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Tags (Separadas por vírgula)</label>
+          <input type="text" id="input-art-tags" placeholder="Ex: Análise, 4K, Hardware, Novidades" value="Destaque, GamePulse, Brasil" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3.5 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+        </div>
+
+        <div>
+          <label for="input-art-content" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Texto da Matéria *</label>
+          <textarea id="input-art-content" required rows="6" placeholder="Escreva o conteúdo editorial completo da matéria..." class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl p-3 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-[#202438]">
+          <button type="button" id="btn-cancel-new-article" class="px-4 py-2 rounded-xl text-xs font-semibold text-[#A5A9BC] hover:bg-[#202438] transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" class="bg-[#7C3AED] hover:bg-[#6D28D9] text-[#F4F5FA] font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shadow-[#7C3AED]/25">
+            Publicar Matéria Imediatamente
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <!-- RODAPÉ INSTITUCIONAL PROFISSIONAL -->
+  <footer class="bg-[#0b0d14] border-t border-[#202438] mt-16 text-xs text-[#A5A9BC]" role="contentinfo">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        
+        <!-- Coluna 1: Logo & Missão (2 Colunas) -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4C1D95] flex items-center justify-center p-2 shadow-md">
+              <svg class="w-6 h-6 text-[#F4F5FA]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h4l2-6 4 12 3-8 2 4h5"/>
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-display text-xl font-extrabold tracking-tight text-[#F4F5FA]">
+                GAME<span class="text-[#7C3AED]">PULSE</span>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[#A5A9BC] -mt-1">
+                O pulso do universo gamer
+              </span>
+            </div>
+          </div>
+          <p class="text-xs text-[#A5A9BC] leading-relaxed max-w-sm">
+            Portal editorial brasileiro independente dedicado à cobertura precisa, ágil e especializada em videogames, hardware de ponta, consoles PlayStation, Xbox, Nintendo, computadores e inovações em inteligência artificial.
+          </p>
+          <div class="pt-2 flex items-center gap-3 text-[#A5A9BC]">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#161928] hover:text-[#06B6D4] hover:bg-[#202438] transition-colors" aria-label="Twitter">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#161928] hover:text-[#E60012] hover:bg-[#202438] transition-colors" aria-label="YouTube">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#161928] hover:text-[#A78BFA] hover:bg-[#202438] transition-colors" aria-label="Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Navegação Rápida -->
+        <div class="space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#F4F5FA] block">Editorias</span>
+          <ul class="space-y-2 text-xs">
+            <li><button data-nav="noticias" class="hover:text-[#F4F5FA] transition-colors">Últimas Notícias</button></li>
+            <li><button data-nav="games" class="hover:text-[#F4F5FA] transition-colors">Análises de Jogos</button></li>
+            <li><button data-nav="consoles" class="hover:text-[#F4F5FA] transition-colors">PlayStation, Xbox & Switch</button></li>
+            <li><button data-nav="hardware" class="hover:text-[#F4F5FA] transition-colors">Bancada de Hardware</button></li>
+            <li><button data-nav="tecnologia" class="hover:text-[#F4F5FA] transition-colors">Inteligência Artificial</button></li>
+            <li><button data-nav="guias" class="hover:text-[#F4F5FA] transition-colors">Tutoriais e Otimizações</button></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Institucional -->
+        <div class="space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#F4F5FA] block">Institucional</span>
+          <ul class="space-y-2 text-xs">
+            <li><button data-institutional="sobre" class="hover:text-[#F4F5FA] transition-colors">Sobre o GamePulse</button></li>
+            <li><button data-institutional="contato" class="hover:text-[#F4F5FA] transition-colors">Contato & Sugestão de Pauta</button></li>
+            <li><button data-institutional="editorial" class="hover:text-[#F4F5FA] transition-colors">Política Editorial & Ética</button></li>
+            <li><button data-institutional="privacidade" class="hover:text-[#F4F5FA] transition-colors">Política de Privacidade (LGPD)</button></li>
+            <li><button id="btn-footer-anuncie" class="hover:text-[#F4F5FA] transition-colors text-[#A78BFA]">Anuncie Conosco</button></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Publicidade e Parcerias -->
+        <div class="space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#F4F5FA] block">Publicidade & CMS</span>
+          <p class="text-xs text-[#A5A9BC] leading-relaxed">
+            Plataforma de conteúdo editorial com monetização programática e patrocínio de marcas parceiras.
+          </p>
+                    <button data-institutional="editorial" class="inline-block w-full text-center bg-[#161928] hover:bg-[#202438] hover:text-[#A78BFA] text-[#A5A9BC] border border-[#2A3048] font-semibold text-[11px] py-2 rounded-xl transition-all">Manual da Redação &rarr;</button>
+        </div>
+
+      </div>
+
+      <!-- Linha Final de Copyright e Aviso Ético -->
+      <div class="pt-8 border-t border-[#202438] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#A5A9BC]">
+        <div class="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+          <span>&copy; 2026 GAMEPULSE. Todos os direitos reservados. Brasil.</span>
+          <span class="hidden sm:inline">•</span>
+          <span class="text-[#7C3AED]">O pulso do universo gamer</span>
+        </div>
+        <div class="text-center sm:text-right text-[10px] text-[#A5A9BC]">
+          Portal editorial demonstrativo profissional. Conteúdos demonstrativos para experiência interativa.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT: DADOS, ROTEAMENTO E SISTEMA INTERATIVO COMPLETO -->
+  <!-- ======================================================== -->
+  <script>
+    // --- BANCO DE DADOS EDITORIAL DEMONSTRATIVO GAMEPULSE ---
+    const INITIAL_ARTICLES = [
+      {
+        id: "art-1",
+        title: "A Nova Fronteira dos RPGs Sci-Fi: Como a Próxima Geração de Engines Gráficas Redefine Mundos Vivos",
+        subtitle: "Análise aprofundada sobre renderização neural em tempo real, iluminação volumétrica e ecossistemas dinâmicos em títulos de mundo aberto.",
+        category: "Games",
+        author: "Gabriel Rezende",
+        authorRole: "Editor de Games e Motores Gráficos",
+        date: "07 de Novembro de 2026",
+        readTime: "8 min",
+        views: 14280,
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80",
+        tags: ["RayTracing", "EnginesGráficas", "MundoAberto", "Cyberpunk", "RPG"],
+        isHero: true,
+        isPopular: true,
+        content: `
+          <p class="text-base font-medium text-[#F4F5FA] leading-relaxed">
+            O desenvolvimento de mundos virtuais atingiu um ponto de inflexão definitivo. Durante os últimos cinco anos, o avanço gráfico esteve atrelado principalmente ao aumento bruto de contagem de polígonos e resoluções nativas. Entretanto, o que observamos hoje nos laboratórios e nas versões mais recentes dos motores gráficos modernos é uma transição completa para a física de iluminação neural e inteligência comportamental integrada.
+          </p>
+          
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">Traçado de Caminhos (Path Tracing) em Tempo Real sem Sacrifício de Quadros</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Ao explorar ambientes urbanos densos com múltiplas fontes de luz neon, reflexos em superfícies molhadas e névoa volumétrica reativa, as técnicas tradicionais de screen-space reflections mostravam limitações severas de consistência óptica. A chegada de algoritmos de reconstrução de raios treinados em redes neurais permitiu unificar reflexos, sombras de contato e oclusão de ambiente em um único pipeline preditivo.
+          </p>
+
+          <blockquote class="my-6 p-4 rounded-xl bg-[#202438] border-l-4 border-[#7C3AED] text-sm italic text-[#F4F5FA]">
+            "Não estamos mais apenas renderizando luz estática pré-calculada; estamos simulando o comportamento de cada fóton em tempo real enquanto o jogador interage com o cenário."
+          </blockquote>
+
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">Densidade de NPCs e Comportamento Não-Linear</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Outro marco fundamental reside na autonomia dos habitantes digitais. Em vez de rotinas rígidas pré-programadas em árvores de comportamento fixas, novos modelos semânticos leves operando localmente no hardware do usuário permitem que cidadãos virtuais reajam ao clima, à reputação do protagonista e a incidentes urbanos de forma dinâmica, criando momentos narrativos emergentes inéditos.
+          </p>
+
+          <div class="my-6 p-4 rounded-xl bg-[#10121C] border border-[#202438]">
+            <h4 class="text-xs font-bold text-[#06B6D4] uppercase tracking-wider mb-2">Especificações do Ambiente de Demonstração</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-[#A5A9BC]">
+              <div><strong class="text-[#F4F5FA] block">Resolução:</strong> 4K Nativo (3840x2160)</div>
+              <div><strong class="text-[#F4F5FA] block">Taxa Alvo:</strong> 90+ FPS Estáveis</div>
+              <div><strong class="text-[#F4F5FA] block">Pipeline:</strong> Path Tracing Completo</div>
+              <div><strong class="text-[#F4F5FA] block">Memória VRAM:</strong> 16GB Alocados</div>
+            </div>
+          </div>
+
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Essa confluência tecnológica posiciona os futuros lançamentos de RPGs em uma categoria onde o espetáculo visual não é mero adorno cosmético, mas parte indissociável da atmosfera e do envolvimento emocional do jogador.
+          </p>
+        `
+      },
+      {
+        id: "art-2",
+        title: "Water Cooling Custom e Arquitetura Térmica: O Limite da Eficiência em GPUs de 600W",
+        subtitle: "Testes de bancada colocam circuitos de refrigeração líquida contra dissipadores a ar em sessões prolongadas de estresse em 4K.",
+        category: "Hardware",
+        author: "Matheus Silveira",
+        authorRole: "Engenheiro de Hardware e Bancada",
+        date: "06 de Novembro de 2026",
+        readTime: "6 min",
+        views: 11950,
+        image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&auto=format&fit=crop&q=80",
+        tags: ["Hardware", "WaterCooling", "GPU", "Overclock", "PCGamer"],
+        isHero: false,
+        isPopular: true,
+        content: `
+          <p class="text-base font-medium text-[#F4F5FA] leading-relaxed">
+            Com as arquiteturas gráficas operando em patamares energéticos na faixa de 450W a 600W sob carga total de renderização e traçado de raios, o gerenciamento térmico deixou de ser uma preocupação exclusiva de overclockers extremos e passou a determinar diretamente a consistência do clock de boost em computadores topo de linha.
+          </p>
+
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">Resultados em Bancada Aberta vs. Gabinete Selado</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Em nosso teste com loop personalizado contendo tubos rígidos, bomba D5 de alta vazão e dois radiadores de cobre de 360mm x 45mm, a temperatura máxima no hotspot da GPU não ultrapassou 58°C durante uma sessão ininterrupta de quatro horas no benchmark Time Spy Extreme. Em contraste, o dissipador original a ar atingiu 79°C no mesmo intervalo, resultando em thermal throttling perceptível e queda de cerca de 180 MHz na frequência de operação.
+          </p>
+
+          <blockquote class="my-6 p-4 rounded-xl bg-[#202438] border-l-4 border-[#06B6D4] text-sm italic text-[#F4F5FA]">
+            "Cada grau a menos no silício representa não apenas menor ruído acústico no ambiente, mas um headroom estável de clock que faz toda a diferença em taxas de 1% low FPS."
+          </blockquote>
+
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">Custo-Benefício e Manutenção no Clima Brasileiro</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Para usuários em regiões tropicais do Brasil, onde temperaturas ambientes frequentemente superam 30°C no verão, a escolha de fluidos dielétricos com inibidores de corrosão galvânica e biocidas se faz indispensável para garantir a durabilidade dos blocos de níquel e conexões de latão.
+          </p>
+        `
+      },
+      {
+        id: "art-3",
+        title: "A Evolução dos Controles Hápticos e Gatilhos Adaptativos na Próxima Fase da Geração",
+        subtitle: "Como o feedback tátil de alta fidelidade e micro-atuadores estão elevando a percepção física nos consoles domésticos.",
+        category: "Consoles",
+        author: "Camila Duarte",
+        authorRole: "Especialista em Consoles e Ergonomia",
+        date: "05 de Novembro de 2026",
+        readTime: "5 min",
+        views: 9840,
+        image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&auto=format&fit=crop&q=80",
+        tags: ["PlayStation", "Xbox", "Consoles", "DualSense", "Gamer"],
+        isHero: false,
+        isPopular: true,
+        content: `
+          <p class="text-base font-medium text-[#F4F5FA] leading-relaxed">
+            Se nos primórdios dos videogames a resposta física se resumia a vibrações descompassadas de motores de contrapeso assimétricos, a geração atual consolidou a resposta sonora-tátil. Atuadores de bobina de voz integrados nos manetes agora transmitem texturas minuciosas: desde as passadas na areia até o clique sutil de engrenagens mecânicas.
+          </p>
+
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">Integração com Simulação Física de Veículos e Armas</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Em simuladores de corrida de alto nível, os gatilhos resistivos fornecem feedback imediato sobre a perda de aderência dos pneus e a atuação de sistemas de freio ABS. Isso permite que o piloto sinta o momento exato em que o veículo entra em subesterço antes mesmo que a pista visual indique a saída de traçado.
+          </p>
+
+          <p class="leading-relaxed text-[#A5A9BC]">
+            A padronização dessas APIs no ecossistema multiplataforma finalmente viabilizou que títulos lançados simultaneamente em consoles e computadores usufruam da mesma fidelidade de resposta sem necessidade de mapeamentos manuais de software.
+          </p>
+        `
+      },
+      {
+        id: "art-4",
+        title: "Inteligência Artificial Generativa e NPCs Vivos: O Salto na Dublagem Dinâmica dos Jogos",
+        subtitle: "Modelos neurais locais possibilitam linhas de voz contextuais e adaptação instantânea à narrativa escolhida pelo jogador.",
+        category: "Tecnologia",
+        author: "Rafael Nogueira",
+        authorRole: "Pesquisador de IA e Tecnologias Interativas",
+        date: "05 de Novembro de 2026",
+        readTime: "7 min",
+        views: 13120,
+        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80",
+        tags: ["InteligenciaArtificial", "Tecnologia", "Inovacao", "NPCs", "Audio"],
+        isHero: false,
+        isPopular: true,
+        content: `
+          <p class="text-base font-medium text-[#F4F5FA] leading-relaxed">
+            A convergência entre grandes modelos de linguagem (LLMs) compactos quantizados e sintetizadores neurais de voz em tempo real está inaugurando a primeira safra de jogos onde personagens coadjuvantes deixam de depender exclusivamente de bancos de áudio gravados em estúdio com frases pré-estabelecidas.
+          </p>
+
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">Ética, Direitos Autorais e Colaboração com Dubladores</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            O modelo editorial que vem ganhando força na indústria envolve acordos formais de licenciamento biométrico de voz com dubladores profissionais. Em vez de substituir os artistas, a IA utiliza a biblioteca autorizada do ator com compensação recorrente por cada instância de jogo em que suas modulações emocionais são geradas para histórias ramificadas.
+          </p>
+
+          <blockquote class="my-6 p-4 rounded-xl bg-[#202438] border-l-4 border-[#7C3AED] text-sm italic text-[#F4F5FA]">
+            "A tecnologia potencializa a expressividade humana quando combinada a diretrizes éticas claras e respeito absoluto à categoria de atores de voz."
+          </blockquote>
+        `
+      },
+      {
+        id: "art-5",
+        title: "A Revolução dos PCs Portáteis: Desempenho Gráfico em Silício de Baixo Consumo (15W a 30W)",
+        subtitle: "Como as novas arquiteturas de SoCs integrados permitiram levar títulos exigentes para a palma das mãos sem ruído excessivo.",
+        category: "Consoles",
+        author: "Matheus Silveira",
+        authorRole: "Engenheiro de Hardware e Bancada",
+        date: "04 de Novembro de 2026",
+        readTime: "5 min",
+        views: 8430,
+        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80",
+        tags: ["Portateis", "Nintendo", "Hardware", "SteamDeck", "Consoles"],
+        isHero: false,
+        isPopular: false,
+        content: `
+          <p class="text-base font-medium text-[#F4F5FA] leading-relaxed">
+            O segmento de dispositivos portáteis dedicados a jogos vive seu período mais vibrante da história. O segredo dessa transformação reside na combinação de litografias de ponta com nós de 3nm e arquiteturas de memória LPDDR5X com largura de banda suficiente para alimentar núcleos gráficos sem engasgos.
+          </p>
+
+          <h3 class="font-display text-xl font-bold text-[#F4F5FA] mt-6 mb-3">O Papel do Upcaling por Inteligência Artificial nas Telas Portáteis</h3>
+          <p class="leading-relaxed text-[#A5A9BC]">
+            Em displays com resoluções de 1080p ou 1200p de 7 a 8 polegadas, a densidade de pixels por polegada (PPI) é elevada o suficiente para que algoritmos de reconstrução espacial operem com extrema nitidez, consumindo menos de 18W de potência da bateria enquanto mantêm 60 FPS fluidos em jogos de mundo aberto.
+          </p>
+        `
+      }
+    ];
+
+    let articles = [...INITIAL_ARTICLES];
+    let currentArticleId = null;
+
+    const articleComments = {
+      "art-1": [
+        { author: "Lucas GamerBR", date: "Há 2 horas", text: "Espetacular essa análise da nova iluminação! Realmente a reconstrução neural mudou o jogo. Quero ver isso rodando em mundos abertos densos." },
+        { author: "Renata Tech", date: "Há 4 horas", text: "Excelente matéria da equipe GamePulse. O foco nos NPCs com IA semântica é o verdadeiro diferencial para os próximos anos." },
+        { author: "Felipe_RTX", date: "Ontem", text: "Parabéns pela qualidade editorial! O design escuro do portal ficou maravilhoso para leitura prolongada." }
+      ]
+    };
+
+    function navigateTo(route, param = null) {
+      const viewHome = document.getElementById('view-home');
+      const viewCategoryFeed = document.getElementById('view-category-feed');
+      const viewArticle = document.getElementById('view-article');
+      const viewInstitutional = document.getElementById('view-institutional');
+
+      document.getElementById('mobile-menu-drawer').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      viewHome.classList.add('hidden');
+      viewCategoryFeed.classList.add('hidden');
+      viewArticle.classList.add('hidden');
+      viewInstitutional.classList.add('hidden');
+
+      document.querySelectorAll('.nav-item-btn').forEach(btn => {
+        btn.classList.remove('bg-[#202438]', 'text-[#F4F5FA]', 'font-semibold');
+        btn.classList.add('text-[#A5A9BC]');
+      });
+
+      if (route === 'inicio') {
+        viewHome.classList.remove('hidden');
+        const homeBtn = document.querySelector('[data-nav="inicio"]');
+        if (homeBtn) {
+          homeBtn.classList.add('bg-[#202438]', 'text-[#F4F5FA]', 'font-semibold');
+          homeBtn.classList.remove('text-[#A5A9BC]');
+        }
+        
+      renderLatestNewsGrid();
+        renderPopularArticles();
+        renderConsoleCards("todos");
+        window.location.hash = '#/inicio';
+      } 
+      else if (route === 'categoria' || route === 'noticias' || route === 'games' || route === 'consoles' || route === 'hardware' || route === 'tecnologia' || route === 'guias') {
+        viewCategoryFeed.classList.remove('hidden');
+        const catName = param || (route === 'noticias' ? 'Todas' : capitalize(route));
+        renderCategoryFeed(catName);
+        
+        const navBtn = document.querySelector(`[data-nav="${route}"]`);
+        if (navBtn) {
+          navBtn.classList.add('bg-[#202438]', 'text-[#F4F5FA]', 'font-semibold');
+          navBtn.classList.remove('text-[#A5A9BC]');
+        }
+        window.location.hash = `#/categoria/${encodeURIComponent(catName)}`;
+      } 
+      else if (route === 'artigo') {
+        viewArticle.classList.remove('hidden');
+        renderArticleDetail(param);
+        window.location.hash = `#/artigo/${param}`;
+      } 
+      else if (route === 'institucional') {
+        viewInstitutional.classList.remove('hidden');
+        renderInstitutionalPage(param || 'sobre');
+        window.location.hash = `#/institucional/${param}`;
+      }
+    }
+
+    function capitalize(str) {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    
+    // Sincronização automática com matérias publicadas no Decap CMS / GitHub
+    async function loadCmsArticles() {
+      try {
+        const repo = 'felipegarciademoraes515-afk/gamepulse';
+        const res = await fetch(`https://api.github.com/repos/${repo}/contents/_artigos`);
+        if (!res.ok) return;
+        const files = await res.json();
+        if (!Array.isArray(files)) return;
+
+        let hasNew = false;
+        for (const file of files) {
+          if (!file.name.endsWith('.md')) continue;
+          const artId = 'cms-' + file.name.replace('.md', '');
+          if (articles.some(a => a.id === artId)) continue;
+
+          try {
+            const contentRes = await fetch(file.download_url);
+            if (!contentRes.ok) continue;
+            const raw = await contentRes.text();
+
+            const fmMatch = raw.match(/^---\s*([\s\S]*?)\s*---/);
+            if (fmMatch) {
+              const fm = fmMatch[1];
+              const getVal = (key) => {
+                const m = fm.match(new RegExp(`^${key}:\\s*["\']?(.*?)[\s"\']?$`, 'm'));
+                return m ? m[1].trim() : '';
+              };
+              const isHero = fm.includes('isHero: true');
+              const isPop = fm.includes('isPopular: true');
+              const body = raw.replace(/^---[\s\S]*?---/, '').trim();
+
+              const newArt = {
+                id: artId,
+                title: getVal('title') || 'Nova Matéria',
+                subtitle: getVal('subtitle') || getVal('description') || '',
+                category: getVal('category') || 'Games',
+                author: getVal('author') || 'Redação GamePulse',
+                authorRole: getVal('authorRole') || 'Editor GamePulse Brasil',
+                date: getVal('date') || 'Hoje',
+                readTime: getVal('readTime') || '4 min',
+                views: Math.floor(Math.random() * 500) + 1200,
+                image: getVal('image') || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800',
+                tags: ['Games', 'Destaque', getVal('category') || 'Games'],
+                content: body.split('\n\n').map(p => `<p class="mb-4 text-[#C5C9DC] leading-relaxed">${p}</p>`).join('')
+              };
+
+              articles.unshift(newArt);
+              hasNew = true;
+            }
+          } catch (e) {
+            console.error('Erro ao processar artigo:', file.name, e);
+          }
+        }
+
+        if (hasNew) {
+          renderLatestNewsGrid();
+          renderPopularArticles();
+          renderConsoleCards();
+        }
+      } catch (err) {
+        console.warn('CMS Loader: execução offline ou sem artigos remotos:', err);
+      }
+    }
+
+    function renderLatestNewsGrid(filterCategory = "todos") {
+      const container = document.getElementById('latest-news-grid');
+      if (!container) return;
+
+      const filtered = filterCategory === "todos" 
+        ? articles.slice(0, 6) 
+        : articles.filter(a => a.category.toLowerCase() === filterCategory.toLowerCase()).slice(0, 6);
+
+      container.innerHTML = filtered.map(art => `
+        <article data-article-id="${art.id}" class="group bg-[#161928] border border-[#2A3048] rounded-2xl overflow-hidden hover:border-[#7C3AED]/60 transition-all duration-300 cursor-pointer flex flex-col shadow-lg">
+          <div class="relative h-48 overflow-hidden bg-[#202438]">
+            <img src="${art.image}" alt="${escapeHtml(art.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-[#10121C]/85 backdrop-blur-md text-[10px] font-bold text-[#A78BFA] px-2.5 py-1 rounded-md uppercase tracking-wider border border-[#2A3048]">
+              ${art.category}
+            </span>
+            <span class="absolute bottom-3 right-3 bg-[#10121C]/80 backdrop-blur-sm text-[#A5A9BC] text-[10px] px-2 py-0.5 rounded flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              ${art.readTime}
+            </span>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div>
+              <div class="flex items-center gap-2 text-[11px] text-[#A5A9BC] mb-2">
+                <span>${art.author}</span>
+                <span>•</span>
+                <span>${art.date}</span>
+              </div>
+              <h3 class="font-display text-base font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors leading-snug mb-2 line-clamp-2">
+                ${escapeHtml(art.title)}
+              </h3>
+              <p class="text-xs text-[#A5A9BC] line-clamp-2 leading-relaxed mb-4">
+                ${escapeHtml(art.subtitle)}
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-[#202438] text-xs">
+              <div class="flex items-center gap-1 text-[#A5A9BC] text-[11px]">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>${art.views.toLocaleString('pt-BR')} visualizações</span>
+              </div>
+              <span class="text-[#7C3AED] font-semibold group-hover:translate-x-1 transition-transform">Ler &rarr;</span>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      container.querySelectorAll('[data-article-id]').forEach(card => {
+        card.addEventListener('click', () => {
+          navigateTo('artigo', card.getAttribute('data-article-id'));
+        });
+      });
+    }
+
+    function renderPopularArticles() {
+      const container = document.getElementById('popular-articles-list');
+      if (!container) return;
+
+      const popular = [...articles].sort((a, b) => b.views - a.views).slice(0, 5);
+
+      container.innerHTML = popular.map((art, idx) => `
+        <article data-article-id="${art.id}" class="group flex items-start gap-4 p-3 rounded-xl hover:bg-[#202438]/50 transition-colors cursor-pointer border-b border-[#202438] last:border-0">
+          <span class="font-display text-2xl sm:text-3xl font-extrabold text-[#7C3AED]/70 group-hover:text-[#7C3AED] transition-colors w-8 shrink-0 text-center">
+            0${idx + 1}
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 text-[10px] text-[#A5A9BC] mb-1">
+              <span class="text-[#A78BFA] font-bold uppercase">${art.category}</span>
+              <span>•</span>
+              <span>${art.readTime}</span>
+            </div>
+            <h3 class="text-xs sm:text-sm font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors leading-snug line-clamp-2">
+              ${escapeHtml(art.title)}
+            </h3>
+          </div>
+        </article>
+      `).join('');
+
+      container.querySelectorAll('[data-article-id]').forEach(card => {
+        card.addEventListener('click', () => {
+          navigateTo('artigo', card.getAttribute('data-article-id'));
+        });
+      });
+    }
+
+    function renderConsoleCards(platform = "todos") {
+      const container = document.getElementById('consoles-cards-container');
+      if (!container) return;
+
+      let consoleArticles = articles.filter(a => {
+        if (platform === "todos") {
+          return a.category === "Consoles" || a.tags.some(t => ["PlayStation", "Xbox", "Nintendo", "Portateis"].includes(t));
+        }
+        return a.tags.some(t => t.toLowerCase() === platform.toLowerCase());
+      });
+
+      if (consoleArticles.length === 0) {
+        consoleArticles = articles.filter(a => a.category === "Consoles");
+      }
+
+      container.innerHTML = consoleArticles.slice(0, 3).map(art => {
+        let tagColor = "#7C3AED";
+        if (art.tags.includes("PlayStation")) tagColor = "#006FCD";
+        if (art.tags.includes("Xbox")) tagColor = "#107C10";
+        if (art.tags.includes("Nintendo") || art.tags.includes("Portateis")) tagColor = "#E60012";
+
+        return `
+          <article data-article-id="${art.id}" class="group bg-[#10121C] border border-[#202438] rounded-2xl overflow-hidden hover:border-[#7C3AED] transition-all cursor-pointer flex flex-col shadow">
+            <div class="relative h-44 overflow-hidden bg-[#202438]">
+              <img src="${art.image}" alt="${escapeHtml(art.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 bg-[#10121C]/90 text-[10px] font-bold px-2 py-0.5 rounded uppercase" style="color: ${tagColor}">
+                ${art.tags.find(t => ["PlayStation", "Xbox", "Nintendo", "Portateis"].includes(t)) || "Console"}
+              </span>
+            </div>
+            <div class="p-4 flex flex-col justify-between flex-1">
+              <div>
+                <span class="text-[10px] text-[#A5A9BC] mb-1 block">${art.date}</span>
+                <h3 class="text-xs sm:text-sm font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors leading-snug line-clamp-2 mb-2">
+                  ${escapeHtml(art.title)}
+                </h3>
+              </div>
+              <div class="pt-2 border-t border-[#202438] flex items-center justify-between text-[11px] text-[#A5A9BC]">
+                <span>${art.readTime}</span>
+                <span class="text-[#7C3AED] font-semibold group-hover:translate-x-1 transition-transform">Ver &rarr;</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      container.querySelectorAll('[data-article-id]').forEach(card => {
+        card.addEventListener('click', () => {
+          navigateTo('artigo', card.getAttribute('data-article-id'));
+        });
+      });
+    }
+
+    function renderCategoryFeed(catName) {
+      const titleEl = document.getElementById('category-feed-title');
+      const breadcrumbEl = document.getElementById('category-feed-breadcrumb');
+      const countEl = document.getElementById('category-feed-count');
+      const pillsContainer = document.getElementById('feed-category-pills');
+      const grid = document.getElementById('category-articles-grid');
+
+      const isAll = !catName || catName.toLowerCase() === 'todas' || catName.toLowerCase() === 'noticias';
+      const filtered = isAll 
+        ? articles 
+        : articles.filter(a => a.category.toLowerCase() === catName.toLowerCase() || a.tags.some(t => t.toLowerCase() === catName.toLowerCase()));
+
+      titleEl.textContent = isAll ? "Todas as Notícias e Conteúdo" : `Editoria: ${catName}`;
+      breadcrumbEl.textContent = isAll ? "Todas as Notícias" : catName;
+      countEl.textContent = `${filtered.length} matérias disponíveis`;
+
+      const categoriesList = ["Todas", "Games", "Consoles", "Hardware", "Tecnologia", "Guias"];
+      pillsContainer.innerHTML = categoriesList.map(cat => {
+        const active = (isAll && cat === "Todas") || (!isAll && cat.toLowerCase() === catName.toLowerCase());
+        return `
+          <button data-cat-pill="${cat}" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${active ? 'bg-[#7C3AED] text-[#F4F5FA]' : 'bg-[#202438] text-[#A5A9BC] hover:text-[#F4F5FA]'}">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+
+      pillsContainer.querySelectorAll('[data-cat-pill]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const c = btn.getAttribute('data-cat-pill');
+          renderCategoryFeed(c);
+        });
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-3 text-center py-16 bg-[#161928] border border-[#2A3048] rounded-2xl p-8">
+            <svg class="w-12 h-12 text-[#A5A9BC] mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+            <h3 class="text-base font-bold text-[#F4F5FA] mb-1">Nenhum artigo encontrado nesta categoria</h3>
+            <p class="text-xs text-[#A5A9BC] mb-4">Você pode publicar uma nova matéria usando o botão no topo do portal.</p>
+            <button id="btn-empty-publish" class="bg-[#7C3AED] hover:bg-[#6D28D9] text-[#F4F5FA] text-xs font-bold px-4 py-2 rounded-xl transition-colors">
+              + Publicar Artigo
+            </button>
+          </div>
+        `;
+        const emptyBtn = document.getElementById('btn-empty-publish');
+        if (emptyBtn) {
+          emptyBtn.addEventListener('click', () => {
+            document.getElementById('modal-new-article').classList.remove('hidden');
+          });
+        }
+        return;
+      }
+
+      grid.innerHTML = filtered.map(art => `
+        <article data-article-id="${art.id}" class="group bg-[#161928] border border-[#2A3048] rounded-2xl overflow-hidden hover:border-[#7C3AED]/60 transition-all duration-300 cursor-pointer flex flex-col shadow-lg">
+          <div class="relative h-48 overflow-hidden bg-[#202438]">
+            <img src="${art.image}" alt="${escapeHtml(art.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 bg-[#10121C]/85 backdrop-blur-md text-[10px] font-bold text-[#A78BFA] px-2.5 py-1 rounded-md uppercase tracking-wider border border-[#2A3048]">
+              ${art.category}
+            </span>
+            <span class="absolute bottom-3 right-3 bg-[#10121C]/80 backdrop-blur-sm text-[#A5A9BC] text-[10px] px-2 py-0.5 rounded">
+              ${art.readTime}
+            </span>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div>
+              <div class="flex items-center gap-2 text-[11px] text-[#A5A9BC] mb-2">
+                <span>${art.author}</span>
+                <span>•</span>
+                <span>${art.date}</span>
+              </div>
+              <h3 class="font-display text-base font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors leading-snug mb-2 line-clamp-2">
+                ${escapeHtml(art.title)}
+              </h3>
+              <p class="text-xs text-[#A5A9BC] line-clamp-2 leading-relaxed mb-4">
+                ${escapeHtml(art.subtitle)}
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-[#202438] text-xs">
+              <span class="text-[11px] text-[#A5A9BC]">${art.views.toLocaleString('pt-BR')} lidas</span>
+              <span class="text-[#7C3AED] font-semibold group-hover:translate-x-1 transition-transform">Ler matéria &rarr;</span>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      grid.querySelectorAll('[data-article-id]').forEach(card => {
+        card.addEventListener('click', () => {
+          navigateTo('artigo', card.getAttribute('data-article-id'));
+        });
+      });
+    }
+
+    function renderArticleDetail(articleId) {
+      const art = articles.find(a => a.id === articleId) || articles[0];
+      currentArticleId = art.id;
+
+      art.views += 1;
+
+      document.getElementById('article-category-badge').textContent = art.category;
+      document.getElementById('article-read-time').textContent = `${art.readTime} de leitura`;
+      document.getElementById('article-title').textContent = art.title;
+      document.getElementById('article-subtitle').textContent = art.subtitle;
+      document.getElementById('article-author-name').textContent = art.author;
+      document.getElementById('article-date').textContent = `Publicado em ${art.date}`;
+      document.getElementById('article-cover-img').src = art.image;
+      document.getElementById('article-cover-img').alt = art.title;
+
+      document.getElementById('article-breadcrumb-cat').textContent = art.category;
+      document.getElementById('article-breadcrumb-title').textContent = art.title;
+
+      document.getElementById('article-body-content').innerHTML = art.content;
+
+      const tagsContainer = document.getElementById('article-tags-container');
+      tagsContainer.innerHTML = art.tags.map(tag => `
+        <button data-tag="${tag}" class="article-tag-btn px-3 py-1 rounded-lg bg-[#202438] text-xs text-[#A78BFA] hover:bg-[#7C3AED] hover:text-white transition-colors">
+          #${tag}
+        </button>
+      `).join('');
+
+      tagsContainer.querySelectorAll('[data-tag]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.getAttribute('data-tag');
+          navigateTo('categoria', t);
+        });
+      });
+
+      const relatedContainer = document.getElementById('article-related-list');
+      const related = articles.filter(a => a.id !== art.id).slice(0, 3);
+      relatedContainer.innerHTML = related.map(rel => `
+        <article data-article-id="${rel.id}" class="group p-2.5 rounded-xl hover:bg-[#202438]/60 transition-colors cursor-pointer border border-transparent hover:border-[#2A3048]">
+          <span class="text-[10px] font-bold text-[#A78BFA] uppercase block mb-1">${rel.category}</span>
+          <h4 class="text-xs font-bold text-[#F4F5FA] group-hover:text-[#A78BFA] transition-colors line-clamp-2 leading-snug">
+            ${escapeHtml(rel.title)}
+          </h4>
+          <span class="text-[10px] text-[#A5A9BC] mt-1 block">${rel.readTime} de leitura</span>
+        </article>
+      `).join('');
+
+      relatedContainer.querySelectorAll('[data-article-id]').forEach(card => {
+        card.addEventListener('click', () => {
+          navigateTo('artigo', card.getAttribute('data-article-id'));
+        });
+      });
+
+      renderComments(art.id);
+    }
+
+    function renderComments(articleId) {
+      const list = document.getElementById('comments-list');
+      const countEl = document.getElementById('comments-count');
+      const comments = articleComments[articleId] || [];
+
+      countEl.textContent = comments.length;
+
+      if (comments.length === 0) {
+        list.innerHTML = `
+          <div class="text-center py-6 text-xs text-[#A5A9BC] bg-[#10121C] rounded-xl border border-[#202438]">
+            Seja o primeiro a comentar sobre esta matéria!
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = comments.map(c => `
+        <div class="p-3.5 rounded-xl bg-[#10121C] border border-[#202438] space-y-1.5">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-[#F4F5FA] flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-[#7C3AED]/30 text-[#A78BFA] flex items-center justify-center text-[10px] font-bold">
+                ${c.author.charAt(0).toUpperCase()}
+              </span>
+              ${escapeHtml(c.author)}
+            </span>
+            <span class="text-[11px] text-[#A5A9BC]">${c.date}</span>
+          </div>
+          <p class="text-xs text-[#A5A9BC] leading-relaxed pl-6.5">
+            ${escapeHtml(c.text)}
+          </p>
+        </div>
+      `).join('');
+    }
+
+    function renderInstitutionalPage(type) {
+      const wrapper = document.getElementById('institutional-content-wrapper');
+      if (!wrapper) return;
+
+      if (type === 'sobre') {
+        wrapper.innerHTML = `
+          <div class="space-y-6">
+            <div class="border-b border-[#202438] pb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#7C3AED]">Quem Somos</span>
+              <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#F4F5FA] mt-1">Sobre o GAMEPULSE</h1>
+              <p class="text-sm text-[#A5A9BC] mt-1">O pulso do universo gamer no jornalismo brasileiro</p>
+            </div>
+            
+            <div class="space-y-4 text-sm text-[#A5A9BC] leading-relaxed">
+              <p>
+                O <strong class="text-[#F4F5FA]">GAMEPULSE</strong> nasceu da necessidade de um jornalismo editorial em videogames e tecnologia que una velocidade, profundidade técnica e paixão autêntica pela cultura dos jogos eletrônicos.
+              </p>
+              <p>
+                Nossa redação é formada por jornalistas, analistas de bancada e jogadores veteranos comprometidos em entregar reportagens rigorosas sobre o mercado nacional e internacional, análises sem amarras comerciais, testes de estresse em hardware e coberturas que respeitam a inteligência do leitor.
+              </p>
+              
+              <h3 class="font-display text-lg font-bold text-[#F4F5FA] pt-4 text-[#7C3AED]">Nossos Pilares Editoriais</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div class="p-4 rounded-xl bg-[#10121C] border border-[#202438]">
+                  <strong class="text-[#F4F5FA] block mb-1">Independência</strong>
+                  <span class="text-xs">Nossos vereditos não sofrem interferência de anunciantes ou produtoras de jogos.</span>
+                </div>
+                <div class="p-4 rounded-xl bg-[#10121C] border border-[#202438]">
+                  <strong class="text-[#F4F5FA] block mb-1">Rigor Técnico</strong>
+                  <span class="text-xs">Bancada própria com testes comparativos e metodologias documentadas.</span>
+                </div>
+                <div class="p-4 rounded-xl bg-[#10121C] border border-[#202438]">
+                  <strong class="text-[#F4F5FA] block mb-1">Foco no Brasil</strong>
+                  <span class="text-xs">Cobertura atenta à realidade de preços, infraestrutura e dublagem nacional.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } 
+      else if (type === 'contato') {
+        wrapper.innerHTML = `
+          <div class="space-y-6">
+            <div class="border-b border-[#202438] pb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#7C3AED]">Canais Oficiais</span>
+              <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#F4F5FA] mt-1">Fale com a Redação</h1>
+              <p class="text-sm text-[#A5A9BC] mt-1">Envie sugestões de pauta, releases de imprensa ou propostas comerciais</p>
+            </div>
+
+            <form id="institutional-contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Seu Nome *</label>
+                  <input type="text" id="contact-name" required placeholder="Nome completo..." class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3.5 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+                </div>
+                <div>
+                  <label for="contact-email" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Seu E-mail *</label>
+                  <input type="email" id="contact-email" required placeholder="contato@empresa.com..." class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3.5 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-subject" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Assunto *</label>
+                <select id="contact-subject" class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl px-3.5 py-2.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]">
+                  <option value="pauta">Sugestão de Pauta / Release de Imprensa</option>
+                  <option value="publicidade">Anúncios, Mídia Kit e Parcerias Comerciais</option>
+                  <option value="correcao">Correção de Erro ou Retificação Editorial</option>
+                  <option value="outros">Dúvidas e Suporte Geral</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="contact-msg" class="block text-xs font-bold text-[#F4F5FA] uppercase mb-1">Mensagem *</label>
+                <textarea id="contact-msg" required rows="5" placeholder="Detalhe sua mensagem para os editores do GamePulse..." class="w-full bg-[#10121C] border border-[#2A3048] rounded-xl p-3.5 text-xs text-[#F4F5FA] focus:outline-none focus:border-[#7C3AED]"></textarea>
+              </div>
+
+              <div class="pt-2">
+                <button type="submit" class="bg-[#7C3AED] hover:bg-[#6D28D9] text-[#F4F5FA] font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md shadow-[#7C3AED]/25">
+                  Enviar Mensagem para a Equipe
+                </button>
+              </div>
+            </form>
+          </div>
+        `;
+
+        document.getElementById('institutional-contact-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          showToast('Sua mensagem foi enviada à redação! Responderemos em até 24 horas úteis.');
+          e.target.reset();
+        });
+      } 
+      else if (type === 'editorial') {
+        wrapper.innerHTML = `
+          <div class="space-y-6">
+            <div class="border-b border-[#202438] pb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#7C3AED]">Manual de Conduta</span>
+              <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#F4F5FA] mt-1">Política Editorial e Ética</h1>
+              <p class="text-sm text-[#A5A9BC] mt-1">Diretrizes de transparência, correções e avaliação crítica</p>
+            </div>
+
+            <div class="space-y-4 text-sm text-[#A5A9BC] leading-relaxed">
+              <h3 class="font-display text-lg font-bold text-[#F4F5FA]">1. Política de Análises e Reviews</h3>
+              <p>
+                As análises publicadas no GamePulse utilizam uma escala de 0 a 10 com notas decimais. Nenhum código de acesso antecipado fornecido sob embargo garante nota favorável. Quando recebemos cópias para análise fornecidas por distribuidoras, declaramos essa informação de forma visível ao final do texto.
+              </p>
+
+              <h3 class="font-display text-lg font-bold text-[#F4F5FA] pt-2">2. Política de Correções Rápidas</h3>
+              <p>
+                Caso identifiquemos qualquer erro factual, técnico ou de data, a matéria é retificada imediatamente com uma nota de rodapé identificando o horário e a natureza da correção, garantindo integridade documental aos nossos leitores.
+              </p>
+
+              <h3 class="font-display text-lg font-bold text-[#F4F5FA] pt-2">3. Conteúdo Patrocinado e Publicidade</h3>
+              <p>
+                Todo espaço publicitário ou matéria patrocinada recebe a marcação indelével de "Publicidade", "Publieditorial" ou "Anúncio Patrocinado", separando com clareza o conteúdo editorial do interesse comercial.
+              </p>
+            </div>
+          </div>
+        `;
+      } 
+      else if (type === 'privacidade') {
+        wrapper.innerHTML = `
+          <div class="space-y-6">
+            <div class="border-b border-[#202438] pb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#7C3AED]">Privacidade & Dados</span>
+              <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#F4F5FA] mt-1">Política de Privacidade</h1>
+              <p class="text-sm text-[#A5A9BC] mt-1">Conformidade integral com a Lei Geral de Proteção de Dados (LGPD - Lei 13.709/18)</p>
+            </div>
+
+            <div class="space-y-4 text-sm text-[#A5A9BC] leading-relaxed">
+              <p>
+                O portal <strong class="text-[#F4F5FA]">GAMEPULSE</strong> valoriza a sua privacidade. Esta política descreve como tratamos informações de navegação, cookies e dados cadastrais voluntariamente fornecidos.
+              </p>
+
+              <h3 class="font-display text-base font-bold text-[#F4F5FA]">1. Coleta e Finalidade de Dados</h3>
+              <p>
+                Coletamos apenas dados necessários para o funcionamento técnico do portal (endereço IP anonimizado, preferências de leitura e cookies técnicos) e dados voluntários (como e-mail cadastrado na newsletter ou nome em comentários). Não vendemos seus dados pessoais a terceiros sob nenhuma hipótese.
+              </p>
+
+              <h3 class="font-display text-base font-bold text-[#F4F5FA]">2. Seus Direitos</h3>
+              <p>
+                Nos termos da LGPD, o usuário tem direito a solicitar confirmação da existência de tratamento, acesso aos dados, correção de dados incompletos ou eliminação definitiva mediante solicitação via formulário de contato.
+              </p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = `p-3.5 rounded-xl bg-[#161928] border border-[#7C3AED] shadow-2xl text-xs text-[#F4F5FA] flex items-center gap-2.5 transform translate-y-2 opacity-0 transition-all duration-300 pointer-events-auto`;
+      toast.innerHTML = `
+        <div class="w-6 h-6 rounded-full bg-[#7C3AED]/20 text-[#A78BFA] flex items-center justify-center shrink-0">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <span class="flex-1">${escapeHtml(message)}</span>
+      `;
+
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return "";
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCmsArticles();
+      
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const prog = document.getElementById('reading-progress');
+        if (prog) prog.style.width = scrolled + "%";
+      });
+
+      document.querySelectorAll('[data-nav]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const navTarget = btn.getAttribute('data-nav');
+          navigateTo(navTarget);
+        });
+      });
+
+      document.querySelectorAll('[data-institutional]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const instTarget = btn.getAttribute('data-institutional');
+          navigateTo('institucional', instTarget);
+        });
+      });
+
+      document.getElementById('btn-footer-anuncie').addEventListener('click', () => {
+        navigateTo('institucional', 'contato');
+      });
+
+      // Acesso restrito via /admin/
+
+      const tickerHeadlines = [
+        "Próxima geração de arquiteturas gráficas amplia eficiência em 35% nos testes de bancada",
+        "Mercado brasileiro de jogos atinge novo recorde de engajamento no terceiro trimestre",
+        "Engines gráficas adotam IA neural para iluminação e geração de cenários em tempo real",
+        "Torneios regionais de eSports no Brasil batem recordes de transmissão simultânea"
+      ];
+      let tickerIdx = 0;
+      setInterval(() => {
+        tickerIdx = (tickerIdx + 1) % tickerHeadlines.length;
+        const el = document.getElementById('top-ticker-text');
+        if (el) {
+          el.style.opacity = '0';
+          setTimeout(() => {
+            el.textContent = tickerHeadlines[tickerIdx];
+            el.style.opacity = '1';
+          }, 300);
+        }
+      }, 7000);
+
+      document.getElementById('hero-main-card').addEventListener('click', () => {
+        navigateTo('artigo', 'art-1');
+      });
+
+      document.querySelectorAll('.sub-hero-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const id = card.getAttribute('data-article-id');
+          navigateTo('artigo', id);
+        });
+      });
+
+      document.querySelectorAll('#home-category-filters .cat-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#home-category-filters .cat-filter-btn').forEach(b => {
+            b.classList.remove('bg-[#7C3AED]', 'text-[#F4F5FA]');
+            b.classList.add('bg-[#202438]', 'text-[#A5A9BC]');
+          });
+          btn.classList.add('bg-[#7C3AED]', 'text-[#F4F5FA]');
+          btn.classList.remove('bg-[#202438]', 'text-[#A5A9BC]');
+          const filter = btn.getAttribute('data-filter');
+          renderLatestNewsGrid(filter);
+        });
+      });
+
+      document.querySelectorAll('.console-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.console-tab-btn').forEach(b => {
+            b.classList.remove('bg-[#202438]', 'text-[#F4F5FA]');
+            b.classList.add('bg-[#10121C]', 'text-[#A5A9BC]');
+          });
+          btn.classList.add('bg-[#202438]', 'text-[#F4F5FA]');
+          btn.classList.remove('bg-[#10121C]', 'text-[#A5A9BC]');
+          const platform = btn.getAttribute('data-console-tab');
+          renderConsoleCards(platform);
+        });
+      });
+
+      document.getElementById('btn-back-to-feed').addEventListener('click', () => {
+        navigateTo('inicio');
+      });
+
+      document.getElementById('btn-back-from-institutional').addEventListener('click', () => {
+        navigateTo('inicio');
+      });
+
+      const mobileBtn = document.getElementById('btn-mobile-menu');
+      const mobileDrawer = document.getElementById('mobile-menu-drawer');
+      mobileBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('hidden');
+      });
+
+      // Mobile drawer clean
+
+      document.getElementById('btn-newsletter-top').addEventListener('click', () => {
+        const newsletterInput = document.getElementById('newsletter-email');
+        if (newsletterInput) {
+          newsletterInput.scrollIntoView({ behavior: 'smooth' });
+          newsletterInput.focus();
+          showToast("Preencha seu e-mail abaixo para assinar o boletim matinal!");
+        } else {
+          showToast("Boletim diário: acompanhe as novidades no GamePulse!");
+        }
+      });
+
+      document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        showToast("Inscrição realizada com sucesso para " + email + "!");
+        e.target.reset();
+      });
+
+      document.getElementById('comment-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const author = document.getElementById('comment-author').value;
+        const text = document.getElementById('comment-text').value;
+
+        if (!currentArticleId) currentArticleId = 'art-1';
+        if (!articleComments[currentArticleId]) {
+          articleComments[currentArticleId] = [];
+        }
+
+        articleComments[currentArticleId].unshift({
+          author: author,
+          date: "Agora mesmo",
+          text: text
+        });
+
+        renderComments(currentArticleId);
+        showToast("Seu comentário foi publicado com sucesso!");
+        document.getElementById('comment-text').value = '';
+      });
+
+      document.getElementById('btn-share-copy').addEventListener('click', () => {
+        const url = window.location.href;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(() => {
+            showToast("Link do artigo copiado para a área de transferência!");
+          }).catch(() => {
+            showToast("Link copiado!");
+          });
+        } else {
+          showToast("Link: " + url);
+        }
+      });
+
+      document.getElementById('btn-share-whatsapp').addEventListener('click', () => {
+        const title = document.getElementById('article-title').textContent;
+        const text = encodeURIComponent("Confira esta matéria no GAMEPULSE: " + title + " - " + window.location.href);
+        window.open("https://api.whatsapp.com/send?text=" + text, '_blank');
+      });
+
+      document.getElementById('btn-share-twitter').addEventListener('click', () => {
+        const title = document.getElementById('article-title').textContent;
+        const text = encodeURIComponent("Lendo no @GAMEPULSE: " + title + " " + window.location.href);
+        window.open("https://twitter.com/intent/tweet?text=" + text, '_blank');
+      });
+
+      const searchModal = document.getElementById('modal-search');
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results-container');
+      const searchCount = document.getElementById('search-count-label');
+
+      function openSearch() {
+        searchModal.classList.remove('hidden');
+        searchInput.value = '';
+        searchInput.focus();
+        executeSearch('');
+      }
+
+      function closeSearch() {
+        searchModal.classList.add('hidden');
+      }
+
+      document.getElementById('btn-open-search').addEventListener('click', openSearch);
+      document.getElementById('btn-close-search').addEventListener('click', closeSearch);
+
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearch();
+        }
+        if (e.key === 'Escape') {
+          closeSearch();
+          document.getElementById('modal-new-article').classList.add('hidden');
+        }
+      });
+
+      searchInput.addEventListener('input', (e) => {
+        executeSearch(e.target.value);
+      });
+
+      document.querySelectorAll('.search-tag-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const tag = chip.textContent.replace('#', '').trim();
+          searchInput.value = tag;
+          executeSearch(tag);
+        });
+      });
+
+      function executeSearch(query) {
+        const term = query.toLowerCase().trim();
+        if (!term) {
+          searchResults.innerHTML = `
+            <div class="text-center py-8 text-xs text-[#A5A9BC]">
+              Digite uma palavra-chave para buscar entre as matérias de games, hardware, consoles e tecnologia.
+            </div>
+          `;
+          searchCount.textContent = `${articles.length} matérias catalogadas`;
+          return;
+        }
+
+        const matches = articles.filter(a => 
+          a.title.toLowerCase().includes(term) ||
+          a.subtitle.toLowerCase().includes(term) ||
+          a.category.toLowerCase().includes(term) ||
+          a.tags.some(t => t.toLowerCase().includes(term))
+        );
+
+        searchCount.textContent = `${matches.length} resultado(s) encontrado(s)`;
+
+        if (matches.length === 0) {
+          searchResults.innerHTML = `
+            <div class="text-center py-8 text-xs text-[#A5A9BC]">
+              Nenhum artigo encontrado para "<strong class="text-[#F4F5FA]">${escapeHtml(query)}</strong>". Tente buscar por #Hardware, #Games, #RayTracing ou #IA.
+            </div>
+          `;
+          return;
+        }
+
+        searchResults.innerHTML = matches.map(art => `
+          <div data-search-id="${art.id}" class="p-3 rounded-xl bg-[#10121C] hover:bg-[#202438] border border-[#202438] hover:border-[#7C3AED] transition-all cursor-pointer flex gap-3 items-center">
+            <img src="${art.image}" alt="${escapeHtml(art.title)}" class="w-16 h-12 rounded-lg object-cover shrink-0 bg-[#202438]">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 text-[10px] text-[#A5A9BC] mb-0.5">
+                <span class="text-[#A78BFA] font-bold uppercase">${art.category}</span>
+                <span>•</span>
+                <span>${art.readTime}</span>
+              </div>
+              <h4 class="text-xs font-bold text-[#F4F5FA] truncate">${escapeHtml(art.title)}</h4>
+            </div>
+          </div>
+        `).join('');
+
+        searchResults.querySelectorAll('[data-search-id]').forEach(item => {
+          item.addEventListener('click', () => {
+            const id = item.getAttribute('data-search-id');
+            closeSearch();
+            navigateTo('artigo', id);
+          });
+        });
+      }
+
+      
+
+      
+      renderLatestNewsGrid();
+      renderPopularArticles();
+      renderConsoleCards("todos");
+
+      const hash = window.location.hash;
+      if (hash.startsWith('#/artigo/')) {
+        const id = hash.replace('#/artigo/', '');
+        navigateTo('artigo', id);
+      } else if (hash.startsWith('#/categoria/')) {
+        const cat = decodeURIComponent(hash.replace('#/categoria/', ''));
+        navigateTo('categoria', cat);
+      } else if (hash.startsWith('#/institucional/')) {
+        const inst = hash.replace('#/institucional/', '');
+        navigateTo('institucional', inst);
+      } else {
+        navigateTo('inicio');
+      }
+
+    });
+  </script>
+
+  <!-- Redirecionamento de login do Netlify Identity para o Decap CMS -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function(user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function() {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
