@@ -1,6 +1,5 @@
 ---
-title: "GTA 6 APARECEU COM 209,86 GB NA XBOX STORE; JOGO EXIGIRÁ ATÉ 212 GB DE
-  ESPAÇO "
+title: "GTA 6 APARECEU COM 209,86 GB NA XBOX STORE; JOGO EXIGIRÁ ATÉ 212 GB "
 subtitle: Página da Microsoft passou a exibir o tamanho do aguardado lançamento
   da Rockstar. Desenvolvedora já havia informado que o pré-carregamento poderá
   ocupar até 212 GB nos consoles.
